@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/notifications.css') }}">
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='css/role-theme.css') }}">
+
+</head>
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <h2>AI Hotel</h2>
+
+            <span>Maintenance System</span>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/supervisor_dashboard"
+               class="menu-item">
+
+                <span>📊</span>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="/supervisor/reports"
+               class="menu-item">
+
+                <span>📋</span>
+                <span>Reports</span>
+
+            </a>
+
+                <a href="/supervisor/tasks"
+           class="menu-item">
+
+            <span>🔧</span>
+
+            <span>Tasks</span>
+
+        </a>
+
+
+
+
+         <a href="/workers"
+               class="menu-item">
+
+                <span>👨‍🔧</span>
+                <span>Workers</span>
+
+            </a>
+
+            
+
+
+            <a href="/supervisor_ai"
+               class="menu-item">
+
+                <span>🤖</span>
+                <span>AI Assignments</span>
+
+            </a>
+
+
+           
+
+
+            <a href="/notifications"
+               class="menu-item active">
+
+                <span>🔔</span>
+                <span>Notifications</span>
+
+            </a>
+
+
+            <a href="/supervisor_profile"
+               class="menu-item">
+
+                <span>👤</span>
+                <span>Profile</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="logout-container">
+
+            <a href="/logout" class="logout">
+
+                <span>🚪</span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Notifications</h1>
+
+                <p>
+                    Stay updated with maintenance activities.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+                <button class="notification-button">
+
+                    🔔
+
+                    <span class="notification-count">
+                        3
+                    </span>
+
+                </button>
+
+
+                <div class="user-info">
+
+                    <div class="user-avatar">
+                        S
+                    </div>
+
+                    <div>
+
+                        <strong>Supervisor</strong>
+
+                        <span>
+                            Maintenance Supervisor
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ================= NOTIFICATION HEADER ================= -->
+
+        <section class="notification-header">
+
+            <div>
+
+                <h2>
+                    Recent Notifications
+                </h2>
+
+                <p>
+                    Important updates from the maintenance system.
+                </p>
+
+            </div>
+
+
+            <button class="mark-read-btn">
+
+                Mark all as read
+
+            </button>
+
+        </section>
+
+
+
+        <!-- ================= FILTERS ================= -->
+
+        <section class="notification-controls">
+
+
+            <button class="filter active">
+                All
+            </button>
+
+
+            <button class="filter">
+                Unread
+            </button>
+
+
+            <button class="filter">
+                Maintenance
+            </button>
+
+
+            <button class="filter">
+                AI
+            </button>
+
+
+            <button class="filter">
+                Emergency
+            </button>
+
+
+        </section>
+
+
+
+        <!-- ================= NOTIFICATIONS ================= -->
+
+        <section class="notifications-list">
+
+
+            <!-- NEW REPORT -->
+
+            <div class="notification-card unread">
+
+                <div class="notification-icon red">
+                    🚨
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title">
+
+                        <h3>
+                            New Maintenance Report
+                        </h3>
+
+                        <span class="new-badge">
+                            NEW
+                        </span>
+
+                    </div>
+
+
+                    <p>
+
+                        A new maintenance problem has been
+                        reported in <strong>Room 305</strong>.
+
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span>
+                            📍 Floor 3
+                        </span>
+
+                        <span>
+                            ❄️ Air Conditioning
+                        </span>
+
+                        <span>
+                            5 minutes ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a href="/supervisor/ai"
+                   class="notification-action">
+
+                    View
+
+                </a>
+
+            </div>
+
+
+
+            <!-- AI ASSIGNMENT -->
+
+            <div class="notification-card unread">
+
+                <div class="notification-icon blue">
+                    🤖
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title">
+
+                        <h3>
+                            AI Assigned a Worker
+                        </h3>
+
+                        <span class="new-badge">
+                            NEW
+                        </span>
+
+                    </div>
+
+
+                    <p>
+
+                        AI assigned
+                        <strong>Ahmed Hassan</strong>
+                        to the maintenance problem in Room 305.
+
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span>
+                            🤖 AI Match: 94%
+                        </span>
+
+                        <span>
+                            👨‍🔧 Ahmed Hassan
+                        </span>
+
+                        <span>
+                            3 minutes ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a href="/supervisor/ai"
+                   class="notification-action">
+
+                    View
+
+                </a>
+
+            </div>
+
+
+
+            <!-- TASK STARTED -->
+
+            <div class="notification-card">
+
+                <div class="notification-icon orange">
+                    🔧
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title">
+
+                        <h3>
+                            Task Started
+                        </h3>
+
+                    </div>
+
+
+                    <p>
+
+                        Ahmed Hassan has started working
+                        on the maintenance problem in Room 305.
+
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span>
+                            TASK-1024
+                        </span>
+
+                        <span>
+                            👨‍🔧 Ahmed Hassan
+                        </span>
+
+                        <span>
+                            20 minutes ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a href="/technician/task/1024"
+                   class="notification-action">
+
+                    View
+
+                </a>
+
+            </div>
+
+
+
+            <!-- TASK COMPLETED -->
+
+            <div class="notification-card">
+
+                <div class="notification-icon green">
+                    ✓
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title">
+
+                        <h3>
+                            Maintenance Completed
+                        </h3>
+
+                    </div>
+
+
+                    <p>
+
+                        The maintenance problem in
+                        <strong>Room 208</strong>
+                        has been successfully completed.
+
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span>
+                            📍 Floor 2
+                        </span>
+
+                        <span>
+                            👨‍🔧 Mohamed Karim
+                        </span>
+
+                        <span>
+                            1 hour ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a href="/supervisor/reports"
+                   class="notification-action">
+
+                    View
+
+                </a>
+
+            </div>
+
+
+
+            <!-- WORKER UNAVAILABLE -->
+
+            <div class="notification-card">
+
+                <div class="notification-icon yellow">
+                    ⚠️
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title">
+
+                        <h3>
+                            Worker Unavailable
+                        </h3>
+
+                    </div>
+
+
+                    <p>
+
+                        <strong>Sara Ali</strong>
+                        is currently unavailable and
+                        cannot receive new tasks.
+
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span>
+                            👨‍🔧 Plumbing
+                        </span>
+
+                        <span>
+                            Status changed
+                        </span>
+
+                        <span>
+                            2 hours ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a href="/supervisor/workers"
+                   class="notification-action">
+
+                    View
+
+                </a>
+
+            </div>
+
+
+
+            <!-- EMERGENCY -->
+
+            <div class="notification-card emergency">
+
+                <div class="notification-icon dark-red">
+                    🚨
+                </div>
+
+
+                <div class="notification-content">
+
+                    <div class="notification-title">
+
+                        <h3>
+                            Emergency Maintenance Report
+                        </h3>
+
+                        <span class="emergency-badge">
+                            EMERGENCY
+                        </span>
+
+                    </div>
+
+
+                    <p>
+
+                        An emergency problem has been reported
+                        in <strong>Room 412</strong>.
+
+                    </p>
+
+
+                    <div class="notification-meta">
+
+                        <span>
+                            📍 Floor 4
+                        </span>
+
+                        <span>
+                            ⚡ Electrical
+                        </span>
+
+                        <span>
+                            3 hours ago
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <a href="/supervisor/reports"
+                   class="notification-action emergency-btn">
+
+                    View
+
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================= SYSTEM STATUS ================= -->
+
+        <section class="system-status">
+
+
+            <div class="status-icon">
+                🤖
+            </div>
+
+
+            <div>
+
+                <span>
+                    SYSTEM STATUS
+                </span>
+
+                <h2>
+                    AI Maintenance System is operating normally.
+                </h2>
+
+                <p>
+
+                    Reports, worker assignments and maintenance
+                    updates are being monitored automatically.
+
+                </p>
+
+            </div>
+
+
+            <div class="online-status">
+
+                <span></span>
+
+                Online
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>

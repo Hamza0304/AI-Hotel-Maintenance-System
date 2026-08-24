@@ -1,0 +1,356 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* MAIN CONTAINER */
+
+.container {
+    max-width: 1050px;
+    margin: 70px auto;
+    padding: 20px;
+}
+
+
+/* LOGIN CARD */
+
+.login-card {
+    display: flex;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+/* LEFT SIDE */
+
+.info-section {
+    width: 42%;
+
+    background-color: #eef4ff;
+
+    padding: 50px 40px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* ICON */
+
+.info-section .icon {
+    font-size: 65px;
+    margin-bottom: 20px;
+}
+
+
+/* TITLE */
+
+.info-section h2 {
+    font-size: 27px;
+
+    margin-bottom: 15px;
+
+    color: #172554;
+}
+
+
+/* DESCRIPTION */
+
+.info-section > p {
+    color: #64748b;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+
+/* INFORMATION BOX */
+
+.info-box {
+    background-color: white;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    text-align: left;
+
+    margin-bottom: 20px;
+}
+
+.info-box h3 {
+    color: #172554;
+
+    font-size: 16px;
+
+    margin-bottom: 8px;
+}
+
+.info-box p {
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* REPORT BOX */
+
+.report-box {
+    background-color: #f8fafc;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    text-align: left;
+}
+
+.report-box h3 {
+    color: #334155;
+
+    font-size: 16px;
+
+    margin-bottom: 8px;
+}
+
+.report-box p {
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 12px;
+}
+
+
+/* REPORT BUTTON */
+
+.report-link {
+    display: inline-block;
+
+    padding: 9px 15px;
+
+    background-color: #2563eb;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.report-link:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* RIGHT SIDE */
+
+.form-section {
+    width: 58%;
+
+    padding: 55px 50px;
+}
+
+
+/* TITLE */
+
+.form-section h1 {
+    font-size: 30px;
+
+    color: #172554;
+
+    margin-bottom: 10px;
+}
+
+
+/* SUBTITLE */
+
+.subtitle {
+    color: #64748b;
+
+    margin-bottom: 35px;
+}
+
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+
+/* LABEL */
+
+.form-group label {
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    color: #334155;
+}
+
+
+/* INPUT */
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+
+/* INPUT FOCUS */
+
+.form-group input:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.08);
+}
+
+
+/* LOGIN OPTIONS */
+
+.login-options {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+    font-size: 14px;
+}
+
+
+/* REMEMBER ME */
+
+.remember {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #64748b;
+}
+
+.remember input {
+    cursor: pointer;
+}
+
+
+/* FORGOT PASSWORD */
+
+.login-options a {
+    color: #2563eb;
+
+    text-decoration: none;
+}
+
+.login-options a:hover {
+    text-decoration: underline;
+}
+
+
+/* LOGIN BUTTON */
+
+.login-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background-color: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .container {
+        margin: 20px auto;
+    }
+
+    .login-card {
+        flex-direction: column;
+    }
+
+    .info-section,
+    .form-section {
+        width: 100%;
+    }
+
+    .info-section {
+        padding: 35px 25px;
+    }
+
+    .form-section {
+        padding: 35px 25px;
+    }
+
+    .login-options {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+}

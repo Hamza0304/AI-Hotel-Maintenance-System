@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Import Hotel Data</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_import.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <h2>AI Hotel</h2>
+        <span>Maintenance System</span>
+    </div>
+
+    <nav class="sidebar-menu">
+
+        <a href="/admin_dashboard" class="menu-item">
+            📊 <span>Dashboard</span>
+        </a>
+
+        <a href="/admin_setup" class="menu-item">
+            ⚙️ <span>Hotel Setup</span>
+        </a>
+
+        <a href="/admin_rooms" class="menu-item">
+            🚪 <span>Rooms</span>
+        </a>
+
+        <a href="/admin_workers" class="menu-item">
+            👨‍🔧 <span>Workers</span>
+        </a>
+
+          <a
+            href="/admin_staff_accounts" class="menu-item">
+                <span>👥</span>
+                <span>Staff Accounts</span>
+        </a>
+
+        <a href="/admin_import" class="menu-item active">
+            📥 <span>Import Data</span>
+        </a>
+
+         <a href="/admin_settings" class="menu-item">
+
+                <span>🔧</span>
+                <span>Settings</span>
+
+            </a>
+
+    </nav>
+
+    <div class="logout-container">
+
+        <a href="/logout" class="logout">
+            🚪 <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+<main class="main-content">
+
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Import Hotel Data</h1>
+
+            <p>
+                Quickly add rooms and workers using an Excel file.
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- IMPORT OPTIONS -->
+
+    <section class="options">
+
+        <div class="option active">
+
+            <div class="option-icon">
+                📊
+            </div>
+
+            <h2>Excel Import</h2>
+
+            <p>
+                Upload your hotel data using an Excel file.
+            </p>
+
+        </div>
+
+
+        <div class="option" a href="admin_add_room">
+
+            <div class="option-icon">
+                <a href="admin_add_room"></a>
+                ✏️
+            </div>
+
+            <h2>Manual Entry</h2>
+
+            <p>
+                Enter the information manually.
+            </p>
+
+        </div>
+
+
+        <div class="option">
+
+            <div class="option-icon">
+                🔗
+            </div>
+
+            <h2>PMS</h2>
+
+            <p>
+                Connect an existing hotel PMS.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- UPLOAD -->
+
+    <section class="upload-card">
+
+        <div class="upload-icon">
+            📁
+        </div>
+
+        <h2>
+            Upload Excel File
+        </h2>
+
+        <p>
+            Upload an Excel file containing your hotel rooms
+            or maintenance workers.
+        </p>
+
+
+        <form action="/admin/import_excel"
+              method="post"
+              enctype="multipart/form-data">
+
+            <div class="file-box">
+
+                <input
+                    type="file"
+                    name="excel_file"
+                    id="excel_file"
+                    accept=".xlsx,.xls"
+                    required>
+
+                <label for="excel_file">
+
+                    <strong>
+                        Choose Excel File
+                    </strong>
+
+                    <span>
+                        .xlsx or .xls
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <button type="submit">
+                📥 Import Data
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- TEMPLATE -->
+
+    <section class="template-card">
+
+        <div>
+
+            <div class="template-icon">
+                📄
+            </div>
+
+        </div>
+
+        <div class="template-content">
+
+            <h2>
+                Don't have an Excel template?
+            </h2>
+
+            <p>
+                Download our template and fill in your hotel
+                rooms or workers before uploading it.
+            </p>
+
+        </div>
+
+        <a href="{{ url_for('download_template') }}" class="download-button">
+    📥 Download Template
+</a>
+
+    </section>
+
+
+    <!-- EXAMPLE -->
+
+    <section class="example-card">
+
+        <h2>
+            Example: Room Data
+        </h2>
+
+        <p>
+            Your Excel file can contain information like this:
+        </p>
+
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Floor</th>
+                    <th>Room Number</th>
+                    <th>Room Type</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>1</td>
+                    <td>101</td>
+                    <td>Standard</td>
+                    <td>Available</td>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>102</td>
+                    <td>Deluxe</td>
+                    <td>Available</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>201</td>
+                    <td>Suite</td>
+                    <td>Occupied</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <!-- INFO -->
+
+    <section class="info">
+
+        <span>🤖</span>
+
+        <div>
+
+            <strong>
+                What happens after import?
+            </strong>
+
+            <p>
+                The system validates the data and stores it
+                in the database. The AI can then use the
+                information to make maintenance assignments.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

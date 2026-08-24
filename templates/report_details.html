@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Maintenance Report #{{ report.id }}</title>
+
+<link rel="stylesheet"href="{{ url_for('static', filename='css/report_details.css') }}">
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+
+<!-- HEADER -->
+
+<div class="top">
+
+    <h1>
+        Maintenance Report #{{ report.id }}
+    </h1>
+
+    <a href="/supervisor_reports"
+       class="back-button">
+
+        ← Back to reports page
+
+    </a>
+
+</div>
+
+
+
+<!-- REPORT INFORMATION -->
+
+<div class="card">
+
+    <h2>
+        Report Information
+    </h2>
+
+
+    <div class="info-grid">
+
+
+        <div class="info-item">
+
+            <span>
+                Report ID
+            </span>
+
+            <strong>
+                #{{ report.id }}
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span>
+                Room
+            </span>
+
+            <strong>
+                {{ report.room_number }}
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span>
+                Floor
+            </span>
+
+            <strong>
+                {{ report.floor_number }}
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span>
+                Category
+            </span>
+
+            <strong>
+                {{ report.category or "General" }}
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span>
+                Status
+            </span>
+
+            <span class="status">
+                {{ report.status }}
+            </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span>
+                Priority
+            </span>
+
+            <span class="priority">
+                {{ report.priority }}
+            </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span>
+                Assigned Worker
+            </span>
+
+            <strong>
+                {{ report.assigned_worker or "Not assigned" }}
+            </strong>
+
+        </div>
+
+
+        <div class="info-item">
+
+            <span>
+                Reported At
+            </span>
+
+            <strong>
+
+                {% if report.created_at %}
+
+                    {{ report.created_at.strftime('%Y-%m-%d %H:%M') }}
+
+                {% else %}
+
+                    —
+
+                {% endif %}
+
+            </strong>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- PROBLEM DESCRIPTION -->
+
+<div class="card">
+
+    <h2>
+        Problem Description
+    </h2>
+
+    <div class="description">
+
+        {{ report.issue_description }}
+
+    </div>
+
+</div>
+
+
+
+<!-- PHOTO -->
+
+{% if report.photo %}
+
+<div class="card">
+
+    <h2>
+        Attached Photo
+    </h2>
+
+    <div class="photo">
+
+        <p>
+            {{ report.photo }}
+        </p>
+
+    </div>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+
+</html>

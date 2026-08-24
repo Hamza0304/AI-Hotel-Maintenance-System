@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Maintenance Reports</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/supervisor_reports.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+
+        <a href="/supervisor_dashboard"
+           class="menu-item">
+
+            <span>📊</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="/supervisor_reports"
+           class="menu-item active">
+
+            <span>📋</span>
+
+            <span>Reports</span>
+
+        </a>
+
+
+        <a href="/supervisor_tasks"
+           class="menu-item">
+
+            <span>🔧</span>
+
+            <span>Tasks</span>
+
+        </a>
+
+
+        <a href="/workers"
+           class="menu-item">
+
+            <span>👨‍🔧</span>
+
+            <span>Workers</span>
+
+        </a>
+
+
+        <a href="/supervisor_ai"
+           class="menu-item">
+
+            <span>🤖</span>
+
+            <span>AI Assignments</span>
+
+        </a>
+
+
+        <a href="/notifications"
+           class="menu-item">
+
+            <span>🔔</span>
+
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="/supervisor_profile"
+           class="menu-item">
+
+            <span>👤</span>
+
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout"
+           class="logout">
+
+            <span>🚪</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+<div class="container">
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <div>
+
+        <h1>
+            Maintenance Reports
+        </h1>
+
+        <p>
+            View and monitor all maintenance problems reported by hotel staff.
+        </p>
+
+    </div>
+
+
+    <a href="/supervisor_dashboard"
+       class="back-button">
+
+        ← Dashboard
+
+    </a>
+
+</div>
+
+
+
+<!-- ================= STATISTICS ================= -->
+
+<div class="statistics">
+
+
+    <div class="stat-card">
+
+        <span>
+            Total Reports
+        </span>
+
+        <h2>
+            {{ reports|length }}
+        </h2>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>
+            Pending
+        </span>
+
+        <h2>
+            {{ reports|selectattr('status', 'equalto', 'Pending')|list|length }}
+        </h2>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>
+            Active
+        </span>
+
+        <h2>
+            {{
+                reports
+                |selectattr('status', 'in', ['Assigned', 'In Progress'])
+                |list
+                |length
+            }}
+        </h2>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <span>
+            Completed
+        </span>
+
+        <h2>
+            {{ reports|selectattr('status', 'equalto', 'Completed')|list|length }}
+        </h2>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ================= REPORTS TABLE ================= -->
+
+<div class="table-card">
+
+
+    <div class="table-header">
+
+        <h2>
+            All Maintenance Reports
+        </h2>
+
+        <p>
+            Reports are sorted from newest to oldest.
+        </p>
+
+    </div>
+
+
+
+    {% if reports %}
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        ID
+                    </th>
+
+                    <th>
+                        Room
+                    </th>
+
+                    <th>
+                        Problem
+                    </th>
+
+                    <th>
+                        Priority
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Assigned Worker
+                    </th>
+
+                    <th>
+                        Reported
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+            {% for report in reports %}
+
+
+                <tr>
+
+
+                    <!-- ID -->
+
+                    <td>
+
+                        <span class="report-id">
+
+                            #{{ report.id }}
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- ROOM -->
+
+                    <td>
+
+                        <div class="room">
+
+                            Room {{ report.room_number }}
+
+                        </div>
+
+                        <div class="floor">
+
+                            Floor {{ report.floor_number }}
+
+                        </div>
+
+                    </td>
+
+
+
+                    <!-- PROBLEM -->
+
+                    <td>
+
+                        <div class="description">
+
+                            <strong>
+
+                                {{ report.issue_description }}
+
+                            </strong>
+
+                            <span class="category">
+
+                                {{ report.category or "General" }}
+
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+
+                    <!-- PRIORITY -->
+
+                    <td>
+
+                        <span class="badge priority-{{ report.priority|lower|replace(' ', '-') }}">
+
+                            {{ report.priority }}
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        <span class="badge status-{{ report.status|lower|replace(' ', '-') }}">
+
+                            {{ report.status }}
+
+                        </span>
+
+                    </td>
+
+
+
+                    <!-- WORKER -->
+
+                    <td>
+
+                        {% if report.assigned_worker %}
+
+                            <span class="worker">
+
+                                {{ report.assigned_worker }}
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="not-assigned">
+
+                                Not assigned
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+
+                    <!-- DATE -->
+
+                    <td>
+
+                        {% if report.created_at %}
+
+                            {{ report.created_at.strftime('%Y-%m-%d') }}
+
+                            <br>
+
+                            <span class="floor">
+
+                                {{ report.created_at.strftime('%H:%M') }}
+
+                            </span>
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+                    </td>
+
+
+
+                    <!-- ACTION -->
+
+                    <td>
+
+
+                        <a href="{{ url_for('report_details', report_id=report.id) }}"
+                                class="view-button">
+                                View
+                        </a>
+
+                            
+
+                        
+
+                    </td>
+
+
+                </tr>
+
+
+            {% endfor %}
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- ================= NO REPORTS ================= -->
+
+    <div class="empty">
+
+        <div class="empty-icon">
+            📋
+        </div>
+
+        <h2>
+            No Reports Yet
+        </h2>
+
+        <p>
+            There are currently no maintenance reports in the system.
+        </p>
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

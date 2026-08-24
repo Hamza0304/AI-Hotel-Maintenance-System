@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications - Technician</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/technician_notifications.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="/Technician_Dashboard"
+           class="menu-item">
+
+            <span>📊</span>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!--<a href="/task_details"
+           class="menu-item">
+
+            <span>🔧</span>
+            <span>My Tasks</span>
+
+        </a>-->
+
+
+        <a href="/technician_history"
+           class="menu-item">
+
+            <span>📋</span>
+            <span>History</span>
+
+        </a>
+
+
+        <a href="/technician_notifications"
+           class="menu-item active">
+
+            <span>🔔</span>
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="/technician_profile"
+           class="menu-item">
+
+            <span>👤</span>
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout" class="logout">
+
+            <span>🚪</span>
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main-content">
+
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Notifications</h1>
+
+            <p>
+                Stay updated about your maintenance tasks.
+            </p>
+
+        </div>
+
+
+        <div class="user-info">
+
+            <div class="user-avatar">
+                {{ username[:1]|upper }}
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ username }}
+                </strong>
+
+                <span>
+                    Technician
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         NOTIFICATION HEADER
+    ================================================== -->
+
+    <section class="notification-header">
+
+        <div>
+
+            <h2>
+                Your Notifications
+            </h2>
+
+            <p>
+                Important updates related to your work.
+            </p>
+
+        </div>
+
+
+        <div class="notification-number">
+
+            <strong>
+                {{ notifications|length }}
+            </strong>
+
+            <span>
+                Notifications
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         NOTIFICATIONS
+    ================================================== -->
+
+    <section class="notifications-card">
+
+        {% for notification in notifications %}
+
+        <div class="notification-item">
+
+            <div class="notification-icon
+                {{ notification.type|default('info') }}">
+
+                {% if notification.type == "urgent" %}
+
+                    🚨
+
+                {% elif notification.type == "completed" %}
+
+                    ✓
+
+                {% elif notification.type == "assigned" %}
+
+                    🔧
+
+                {% else %}
+
+                    🔔
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-title">
+
+                    <strong>
+                        {{ notification.title }}
+                    </strong>
+
+                    {% if notification.unread %}
+
+                        <span class="new-badge">
+                            NEW
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <p>
+                    {{ notification.message }}
+                </p>
+
+
+                <span class="notification-time">
+
+                    {{ notification.time }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <div>
+                🔔
+            </div>
+
+            <h3>
+                No notifications
+            </h3>
+
+            <p>
+                You don't have any notifications at the moment.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

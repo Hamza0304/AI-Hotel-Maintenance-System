@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Supervisor Dashboard</title>
+
+<link rel="stylesheet"href="{{ url_for('static', filename='css/supervisor_dashboard.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+
+        <a href="/supervisor_dashboard"
+           class="menu-item active">
+
+            <span>📊</span>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="/supervisor_reports"
+           class="menu-item">
+
+            <span>📋</span>
+
+            <span>Reports</span>
+
+        </a>
+
+
+        <a href="/supervisor_tasks"
+           class="menu-item">
+
+            <span>🔧</span>
+
+            <span>Tasks</span>
+
+        </a>
+
+
+        <a href="/workers"
+           class="menu-item">
+
+            <span>👨‍🔧</span>
+
+            <span>Workers</span>
+
+        </a>
+
+
+        <a href="/supervisor_ai"
+           class="menu-item">
+
+            <span>🤖</span>
+
+            <span>AI Assignments</span>
+
+        </a>
+
+
+        <a href="/notifications"
+           class="menu-item">
+
+            <span>🔔</span>
+
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="/supervisor_profile"
+           class="menu-item">
+
+            <span>👤</span>
+
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout"
+           class="logout">
+
+            <span>🚪</span>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+
+    <!-- ================= TOPBAR ================= -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Supervisor Dashboard</h1>
+
+            <p>
+                Monitor maintenance operations and AI assignments.
+            </p>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+
+            <button class="notification-button">
+
+                🔔
+
+                <span class="notification-count">
+                    {{ notification_count }}
+                </span>
+
+            </button>
+
+
+            <div class="user-info">
+
+                <div class="user-avatar">
+                    S
+                </div>
+
+
+                <div>
+
+                    <strong>Supervisor</strong>
+
+                    <span>Maintenance Supervisor</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= WELCOME ================= -->
+
+    <section class="welcome-section">
+
+        <h2>
+            Good morning 👋
+        </h2>
+
+        <p>
+            Here is the current status of hotel maintenance.
+        </p>
+
+    </section>
+
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <section class="statistics">
+
+
+        <!-- TOTAL REPORTS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                📋
+            </div>
+
+            <div>
+
+                <span>
+                    Total Reports
+                </span>
+
+                <h3>
+                    {{ total_reports }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- URGENT PROBLEMS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon red">
+                🚨
+            </div>
+
+            <div>
+
+                <span>
+                    Urgent Problems
+                </span>
+
+                <h3>
+                    {{ urgent_reports }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACTIVE TASKS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon orange">
+                🔧
+            </div>
+
+            <div>
+
+                <span>
+                    Active Tasks
+                </span>
+
+                <h3>
+                    {{ active_tasks }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COMPLETED -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Completed
+                </span>
+
+                <h3>
+                    {{ completed_today }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= MAIN GRID ================= -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- ================= REPORTS ================= -->
+
+        <div class="reports-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Recent Maintenance Reports
+                    </h2>
+
+                    <p>
+                        Latest problems reported by hotel staff.
+                    </p>
+
+                </div>
+
+
+                <a href="/supervisor_reports">
+                    View All
+                </a>
+
+            </div>
+
+
+
+            <!-- ================= REAL DATABASE REPORTS ================= -->
+
+            {% for report in reports %}
+
+            <div class="report-card">
+
+
+                <!-- REPORT INFORMATION -->
+
+                <div class="report-left">
+
+
+                    <!-- PRIORITY -->
+
+                    <span class="priority {{ report.priority|lower|replace(' ', '-') }}">
+
+                        {{ report.priority }}
+
+                    </span>
+
+
+                    <!-- PROBLEM -->
+
+                    <h3>
+
+                        {{ report.issue_description }}
+
+                    </h3>
+
+
+                    <!-- ROOM -->
+
+                    <p>
+
+                        Room {{ report.room_number }}
+                        · Floor {{ report.floor_number }}
+
+                    </p>
+
+
+                    <!-- CATEGORY -->
+
+                    <span class="category">
+
+                        {{ report.category or "General" }}
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- REPORT TIME -->
+
+                <div class="report-middle">
+
+
+                    <span class="report-label">
+
+                        Reported
+
+                    </span>
+
+
+                    {% if report.created_at %}
+
+                    <strong>
+
+                        {{ report.created_at.strftime('%H:%M') }}
+
+                    </strong>
+
+                    {% else %}
+
+                    <strong>
+                        —
+                    </strong>
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- REPORT STATUS -->
+
+                <div class="report-right">
+
+
+                    <span class="status {{ report.status|lower|replace(' ', '-') }}">
+
+                        {{ report.status }}
+
+                    </span>
+
+
+                    <!-- VIEW BUTTON -->
+
+                    <a href="/report_details/{{ report.id }}"
+                       class="view-button">
+
+                        View
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- NO REPORTS -->
+
+            <div class="report-card">
+
+
+                <div class="report-left">
+
+                    <h3>
+                        No maintenance reports
+                    </h3>
+
+                    <p>
+                        There are currently no maintenance reports.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+        <!-- ================= RIGHT PANEL ================= -->
+
+        <aside class="right-panel">
+
+
+            <!-- ================= AI STATUS ================= -->
+
+            <div class="panel-card ai-card">
+
+
+                <div class="ai-header">
+
+
+                    <div class="ai-icon">
+                        🤖
+                    </div>
+
+
+                    <div>
+
+                        <h2>
+                            AI Assignment
+                        </h2>
+
+                        <span>
+                            System Status
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="ai-online">
+
+                    <span></span>
+
+                    AI System Online
+
+                </div>
+
+
+                <p class="ai-description">
+
+                    The AI system is currently analyzing
+                    maintenance reports and assigning
+                    available workers.
+
+                </p>
+
+
+                <div class="ai-stat">
+
+                    <span>
+                        Assignments Today
+                    </span>
+
+                    <strong>
+                        {{ assignments_today }}
+                    </strong>
+
+                </div>
+
+
+                <div class="ai-stat">
+
+                   <strong>
+    {{ successful_assignments }}
+</strong>
+                    <strong>
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="ai-stat">
+
+                    <strong>
+    {{ waiting_for_review }}
+</strong>
+
+                    <strong>
+                        0
+                    </strong>
+
+                </div>
+
+
+                <a href="/ai_assignments"
+                   class="ai-button">
+
+                    View AI Assignments
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- ================= WORKERS ================= -->
+
+           {% for worker in workers %}
+
+<div class="worker-status">
+
+    <div class="worker-info">
+
+        <div class="worker-avatar">
+            {{ worker.name[0]|upper }}
+        </div>
+
+        <div>
+
+            <strong>
+                {{ worker.name }}
+            </strong>
+
+            <span>
+                {{ worker.department or "Maintenance" }}
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <span class="
+        {% if worker.availability == 'Available' %}
+            available
+        {% elif worker.availability in ['Busy', 'Working'] %}
+            busy
+        {% elif worker.availability == 'Offline' %}
+            offline
+        {% else %}
+            unavailable
+        {% endif %}
+    ">
+
+        {{ worker.availability }}
+
+    </span>
+
+</div>
+
+{% else %}
+
+<div class="worker-status">
+
+    <div class="worker-info">
+
+        <div>
+
+            <strong>
+                No workers registered
+            </strong>
+
+            <span>
+                Add workers from the admin panel.
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+
+    <!-- ================= AI RECENT DECISION ================= -->
+
+    <section class="ai-decision-card">
+
+
+        <div class="decision-icon">
+            🤖
+        </div>
+
+
+        <div class="decision-content">
+
+
+            <span class="decision-label">
+                Latest AI Decision
+            </span>
+
+
+            <h2>
+                No AI assignment yet
+            </h2>
+
+
+            <p>
+
+                AI assignment information will appear here
+                once the AI assignment system is connected
+                to maintenance reports and workers.
+
+            </p>
+
+
+        </div>
+
+
+        <div class="decision-score">
+
+
+            <span>
+                Match Score
+            </span>
+
+
+            <strong>
+                —
+            </strong>
+
+
+        </div>
+
+
+        <a href="/ai_assignments"
+           class="review-button">
+
+            Review
+
+        </a>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

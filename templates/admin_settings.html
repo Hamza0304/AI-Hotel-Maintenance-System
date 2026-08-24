@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Settings | AI Hotel</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin_settings.css') }}"
+    >
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>
+            Maintenance System
+        </span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a
+            href="{{ url_for('admin_dashboard') }}"
+            class="menu-item"
+        >
+            📊
+            <span>Dashboard</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_setup') }}"
+            class="menu-item"
+        >
+            ⚙️
+            <span>Hotel Setup</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_rooms') }}"
+            class="menu-item"
+        >
+            🚪
+            <span>Rooms</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_workers') }}"
+            class="menu-item"
+        >
+            👨‍🔧
+            <span>Workers</span>
+        </a>
+
+
+          <a
+            href="/admin_staff_accounts" class="menu-item">
+                <span>👥</span>
+                <span>Staff Accounts</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_import') }}"
+            class="menu-item"
+        >
+            📥
+            <span>Import Data</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_settings') }}"
+            class="menu-item active"
+        >
+            🔧
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout"
+        >
+            🚪
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Settings
+            </h1>
+
+            <p>
+                Manage your AI Hotel Maintenance System.
+            </p>
+
+        </div>
+
+
+        <div class="settings-status">
+
+            <span class="status-dot"></span>
+
+            System Online
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         FLASH / SUCCESS
+    ================================================== -->
+
+    {% if success %}
+
+    <div class="alert success-message">
+
+        <span>✓</span>
+
+        <div>
+            {{ success }}
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+    {% if error %}
+
+    <div class="alert error-message">
+
+        <span>!</span>
+
+        <div>
+            {{ error }}
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+         SETTINGS OVERVIEW
+    ================================================== -->
+
+    <section class="settings-overview">
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                🏨
+            </div>
+
+            <div>
+
+                <span>
+                    Hotel
+                </span>
+
+                <strong>
+                    {{ hotel.hotel_name if hotel else "Not configured" }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                🚪
+            </div>
+
+            <div>
+
+                <span>
+                    Rooms
+                </span>
+
+                <strong>
+                    {{ total_rooms }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                👨‍🔧
+            </div>
+
+            <div>
+
+                <span>
+                    Workers
+                </span>
+
+                <strong>
+                    {{ total_workers }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="overview-card">
+
+            <div class="overview-icon">
+                📋
+            </div>
+
+            <div>
+
+                <span>
+                    Reports
+                </span>
+
+                <strong>
+                    {{ total_reports }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ADMIN ACCOUNT
+    ================================================== -->
+
+    <section class="settings-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                👤
+            </div>
+
+            <div>
+
+                <h2>
+                    Administrator Account
+                </h2>
+
+                <p>
+                    Manage your administrator account information.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            action="{{ url_for('admin_save_settings') }}"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="section"
+                value="account"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        value="{{ session.get('username', 'Admin') }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ settings.get('email', '') }}"
+                        placeholder="admin@aihotel.com"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                Save Account
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SECURITY
+    ================================================== -->
+
+    <section class="settings-card">
+
+    <div class="card-title">
+
+        <div class="title-icon">
+            🔐
+        </div>
+
+        <div>
+
+            <h2>
+                Security
+            </h2>
+
+            <p>
+                Manage your administrator username and password.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form
+        action="{{ url_for('admin_change_password') }}"
+        method="POST"
+    >
+
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+            <label>
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                value="{{ session.get('username', '') }}"
+                placeholder="Enter your username"
+                required
+            >
+
+        </div>
+
+
+        <!-- CURRENT PASSWORD -->
+
+        <div class="form-group">
+
+            <label>
+                Current Password
+            </label>
+
+            <input
+                type="password"
+                name="current_password"
+                placeholder="Enter your current password"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <!-- NEW PASSWORD -->
+
+            <div class="form-group">
+
+                <label>
+                    New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="new_password"
+                    minlength="6"
+                    placeholder="Leave empty to keep current password"
+                >
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label>
+                    Confirm New Password
+                </label>
+
+                <input
+                    type="password"
+                    name="confirm_password"
+                    minlength="6"
+                    placeholder="Confirm new password"
+                >
+
+            </div>
+
+        </div>
+
+
+        <p class="security-hint">
+            Leave the new password fields empty if you only want to
+            change your username.
+        </p>
+
+
+        <button
+            type="submit"
+            class="save-button"
+        >
+            🔐 Update Account
+        </button>
+
+    </form>
+
+</section>
+
+
+
+    <!-- =================================================
+         NOTIFICATIONS
+    ================================================== -->
+
+    <section class="settings-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                🔔
+            </div>
+
+            <div>
+
+                <h2>
+                    Notifications
+                </h2>
+
+                <p>
+                    Control important system notifications.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            action="{{ url_for('admin_save_settings') }}"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="section"
+                value="notifications"
+            >
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        New Maintenance Reports
+                    </strong>
+
+                    <p>
+                        Notify the administrator when a new report
+                        is submitted.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        name="new_reports"
+                        {% if settings.get('new_reports', True) %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        Urgent Problems
+                    </strong>
+
+                    <p>
+                        Receive notifications for urgent problems.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        name="urgent_reports"
+                        {% if settings.get('urgent_reports', True) %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        Worker Availability
+                    </strong>
+
+                    <p>
+                        Monitor worker availability changes.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        name="worker_notifications"
+                        {% if settings.get('worker_notifications', True) %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                Save Notifications
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         AI ASSIGNMENT
+    ================================================== -->
+
+    <section class="settings-card ai-card">
+
+        <div class="card-title">
+
+            <div class="title-icon ai-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <h2>
+                    AI Assignment
+                </h2>
+
+                <p>
+                    Configure how the AI recommends workers.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            action="{{ url_for('admin_save_settings') }}"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="section"
+                value="ai"
+            >
+
+
+            <div class="setting-row">
+
+                <div>
+
+                    <strong>
+                        Enable AI Assignment
+                    </strong>
+
+                    <p>
+                        Allow the AI to recommend the best worker
+                        for each maintenance report.
+                    </p>
+
+                </div>
+
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        name="ai_enabled"
+                        {% if settings.get('ai_enabled', True) %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Assignment Strategy
+                </label>
+
+                <select name="assignment_strategy">
+
+                    <option
+                        value="balanced"
+                        {% if settings.get('assignment_strategy', 'balanced') == 'balanced' %}
+                            selected
+                        {% endif %}
+                    >
+                        Balanced Workload
+                    </option>
+
+
+                    <option
+                        value="skills"
+                        {% if settings.get('assignment_strategy') == 'skills' %}
+                            selected
+                        {% endif %}
+                    >
+                        Skills Matching
+                    </option>
+
+
+                    <option
+                        value="availability"
+                        {% if settings.get('assignment_strategy') == 'availability' %}
+                            selected
+                        {% endif %}
+                    >
+                        Availability First
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                Save AI Settings
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SYSTEM DEFAULTS
+    ================================================== -->
+
+    <section class="settings-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                ⚙️
+            </div>
+
+            <div>
+
+                <h2>
+                    System Defaults
+                </h2>
+
+                <p>
+                    Configure default values used by the system.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <form
+            action="{{ url_for('admin_save_settings') }}"
+            method="POST"
+        >
+
+            <input
+                type="hidden"
+                name="section"
+                value="system"
+            >
+
+
+            <div class="form-grid">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Default Room Status
+                    </label>
+
+                    <select name="default_room_status">
+
+                        <option
+                            value="Available"
+                            {% if settings.get('default_room_status', 'Available') == 'Available' %}
+                                selected
+                            {% endif %}
+                        >
+                            Available
+                        </option>
+
+
+                        <option
+                            value="Maintenance"
+                            {% if settings.get('default_room_status') == 'Maintenance' %}
+                                selected
+                            {% endif %}
+                        >
+                            Maintenance
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Default Report Priority
+                    </label>
+
+                    <select name="default_priority">
+
+                        <option
+                            value="Pending"
+                            {% if settings.get('default_priority', 'Pending') == 'Pending' %}
+                                selected
+                            {% endif %}
+                        >
+                            Pending
+                        </option>
+
+
+                        <option
+                            value="Normal"
+                            {% if settings.get('default_priority') == 'Normal' %}
+                                selected
+                            {% endif %}
+                        >
+                            Normal
+                        </option>
+
+
+                        <option
+                            value="Urgent"
+                            {% if settings.get('default_priority') == 'Urgent' %}
+                                selected
+                            {% endif %}
+                        >
+                            Urgent
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="save-button"
+            >
+                Save System Settings
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SYSTEM INFORMATION
+    ================================================== -->
+
+    <section class="settings-card">
+
+        <div class="card-title">
+
+            <div class="title-icon">
+                ℹ️
+            </div>
+
+            <div>
+
+                <h2>
+                    System Information
+                </h2>
+
+                <p>
+                    Current system status and configuration.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="system-grid">
+
+
+            <div class="system-item">
+
+                <span>
+                    Application
+                </span>
+
+                <strong>
+                    AI Hotel Maintenance
+                </strong>
+
+            </div>
+
+
+            <div class="system-item">
+
+                <span>
+                    Database
+                </span>
+
+                <strong>
+                    MySQL
+                </strong>
+
+            </div>
+
+
+            <div class="system-item">
+
+                <span>
+                    Backend
+                </span>
+
+                <strong>
+                    Flask
+                </strong>
+
+            </div>
+
+
+            <div class="system-item">
+
+                <span>
+                    Rooms
+                </span>
+
+                <strong>
+                    {{ total_rooms }}
+                </strong>
+
+            </div>
+
+
+            <div class="system-item">
+
+                <span>
+                    Workers
+                </span>
+
+                <strong>
+                    {{ total_workers }}
+                </strong>
+
+            </div>
+
+
+            <div class="system-item">
+
+                <span>
+                    Maintenance Reports
+                </span>
+
+                <strong>
+                    {{ total_reports }}
+                </strong>
+
+            </div>
+
+
+            <div class="system-item">
+
+                <span>
+                    AI Assignment
+                </span>
+
+                <strong
+                    class="{% if settings.get('ai_enabled', True) %}
+                               status-online
+                           {% else %}
+                               status-offline
+                           {% endif %}"
+                >
+
+                    {% if settings.get('ai_enabled', True) %}
+                        Enabled
+                    {% else %}
+                        Disabled
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="system-item">
+
+                <span>
+                    System Status
+                </span>
+
+                <strong class="status-online">
+                    Online
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         DANGER ZONE
+    ================================================== -->
+
+    <section class="settings-card danger-card">
+
+        <div class="card-title">
+
+            <div class="title-icon danger-icon">
+                ⚠️
+            </div>
+
+            <div>
+
+                <h2>
+                    Danger Zone
+                </h2>
+
+                <p>
+                    Actions in this section can affect system configuration.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="danger-row">
+
+
+            <div>
+
+                <strong>
+                    Reset Settings
+                </strong>
+
+                <p>
+                    Delete all hotel data and restore the default admin account.
+                </p>
+
+            </div>
+
+
+            <form
+                action="{{ url_for('admin_reset_settings') }}"
+                method="POST"
+                onsubmit="return confirm(
+                    'This will permanently delete all hotel data. Continue?'
+                );"
+            >
+
+                <button
+                    type="submit"
+                    class="danger-button"
+                >
+                    Reset Settings
+                </button>
+
+            </form>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="settings-footer">
+
+        <span>
+            AI Hotel Maintenance System
+        </span>
+
+        <span>
+            Administrator Panel
+        </span>
+
+    </footer>
+
+
+</main>
+
+</body>
+
+</html>

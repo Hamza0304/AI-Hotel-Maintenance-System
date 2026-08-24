@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_dashboard.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h2>AI Hotel</h2>
+            <span>Maintenance System</span>
+        </div>
+
+         <nav class="sidebar-menu">
+
+        <a href="/admin_dashboard" class="menu-item active">
+            📊 <span>Dashboard</span>
+        </a>
+
+        <a href="/admin_setup" class="menu-item">
+            ⚙️ <span>Hotel Setup</span>
+        </a>
+
+        <a href="/admin_rooms" class="menu-item">
+            🚪 <span>Rooms</span>
+        </a>
+
+        <a href="/admin_workers" class="menu-item ">
+            👨‍🔧 <span>Workers</span>
+        </a>
+
+
+         <a
+            href="/admin_staff_accounts" class="menu-item">
+                <span>👥</span>
+                <span>Staff Accounts</span>
+        </a>
+
+        <a href="/admin_import" class="menu-item">
+            📥 <span>Import Data</span>
+        </a>
+         <a href="/admin_settings" class="menu-item">
+
+                <span>🔧</span>
+                <span>Settings</span>
+
+            </a>
+
+    </nav>
+
+    <!-- LOGOUT -->
+
+    <div class="logout-container">
+
+        <a href="/logout"
+           class="logout">
+
+            <span>🚪</span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOP BAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Admin Dashboard
+            </h1>
+
+            <p>
+                Overview of the hotel maintenance system.
+            </p>
+
+        </div>
+
+
+        <div class="user-info">
+
+                <div class="user-avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <span>System Administrator</span>
+                </div>
+
+            </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         SYSTEM OVERVIEW
+    ================================================== -->
+
+    <section class="section-heading">
+
+        <h2>
+            Maintenance Overview
+        </h2>
+
+        <p>
+            Current maintenance activity.
+        </p>
+
+    </section>
+
+
+    <section class="stats-grid">
+
+
+        <!-- TOTAL REPORTS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                📋
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Total Reports
+                </span>
+
+                <strong>
+                    {{ total_reports|default(0) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- PENDING -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon orange">
+                ⏳
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Pending
+                </span>
+
+                <strong class="orange-text">
+                    {{ pending_reports|default(0) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- IN PROGRESS -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon purple">
+                🔧
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    In Progress
+                </span>
+
+                <strong class="purple-text">
+                    {{ in_progress_reports|default(0) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COMPLETED -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                ✓
+            </div>
+
+            <div class="stat-content">
+
+                <span>
+                    Completed
+                </span>
+
+                <strong class="green-text">
+                    {{ completed_reports|default(0) }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         WORKERS OVERVIEW
+    ================================================== -->
+
+    <section class="section-heading workers-heading">
+
+        <h2>
+            Workers Overview
+        </h2>
+
+        <p>
+            Current status of your maintenance team.
+        </p>
+
+    </section>
+
+
+    <section class="worker-grid">
+
+
+        <!-- TOTAL -->
+
+        <div class="worker-card">
+
+            <div class="worker-card-top">
+
+                <span>
+                    👨‍🔧
+                </span>
+
+            </div>
+
+            <strong>
+                {{ total_workers|default(0) }}
+            </strong>
+
+            <p>
+                Total Workers
+            </p>
+
+        </div>
+
+
+
+        <!-- AVAILABLE -->
+
+        <div class="worker-card available">
+
+            <div class="worker-card-top">
+
+                <span>
+                    ✓
+                </span>
+
+            </div>
+
+            <strong>
+                {{ available_workers|default(0) }}
+            </strong>
+
+            <p>
+                Available
+            </p>
+
+        </div>
+
+
+
+        <!-- WORKING -->
+
+        <div class="worker-card working">
+
+            <div class="worker-card-top">
+
+                <span>
+                    🔧
+                </span>
+
+            </div>
+
+            <strong>
+                {{ working_workers|default(0) }}
+            </strong>
+
+            <p>
+                Working
+            </p>
+
+        </div>
+
+
+
+        <!-- OFFLINE -->
+
+        <div class="worker-card offline">
+
+            <div class="worker-card-top">
+
+                <span>
+                    ●
+                </span>
+
+            </div>
+
+            <strong>
+                {{ offline_workers|default(0) }}
+            </strong>
+
+            <p>
+                Offline
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TWO COLUMN AREA
+    ================================================== -->
+
+    <section class="dashboard-columns">
+
+
+        <!-- =================================================
+             RECENT REPORTS
+        ================================================== -->
+
+        <div class="dashboard-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Recent Reports
+                    </h2>
+
+                    <p>
+                        Latest maintenance problems.
+                    </p>
+
+                </div>
+
+
+                <a href="/supervisor_dashboard">
+                    View All
+                </a>
+
+            </div>
+
+
+
+            <div class="reports-list">
+
+
+                {% for report in recent_reports %}
+
+
+                <div class="report-item">
+
+
+                    <div class="report-room">
+
+                        <strong>
+                            Room {{ report.room_number }}
+                        </strong>
+
+                        <span>
+                            Floor {{ report.floor_number }}
+                        </span>
+
+                    </div>
+
+
+                    <div class="report-info">
+
+                        <strong>
+                            {{ report.category or "Other" }}
+                        </strong>
+
+                        <p>
+                            {{ report.issue_description }}
+                        </p>
+
+                    </div>
+
+
+                    <div>
+
+                        {% if report.status == "Completed" %}
+
+                            <span class="status completed">
+                                Completed
+                            </span>
+
+                        {% elif report.status == "In Progress" %}
+
+                            <span class="status progress">
+                                In Progress
+                            </span>
+
+                        {% else %}
+
+                            <span class="status pending">
+                                Pending
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+
+                </div>
+
+
+                {% else %}
+
+
+                <div class="empty">
+
+                    <div>
+                        📋
+                    </div>
+
+                    <h3>
+                        No reports yet
+                    </h3>
+
+                    <p>
+                        Maintenance reports will appear here.
+                    </p>
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+        ================================================== -->
+
+        <div class="dashboard-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                    <p>
+                        Manage the system.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+
+                <!-- ADD WORKER -->
+
+                <a href="/admin_add_workers"
+                   class="quick-action">
+
+                    <div class="quick-icon">
+                        👨‍🔧
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Add Worker
+                        </strong>
+
+                        <span>
+                            Add a new technician
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+
+                <!-- ROOMS -->
+
+                <a href="/admin_rooms"
+                   class="quick-action">
+
+                    <div class="quick-icon">
+                        🚪
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Manage Rooms
+                        </strong>
+
+                        <span>
+                            Manage hotel rooms
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+
+                <!-- IMPORT -->
+
+                <a href="/admin_import"
+                   class="quick-action">
+
+                    <div class="quick-icon">
+                        📥
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Import Data
+                        </strong>
+
+                        <span>
+                            Import hotel information
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+
+
+                <!-- AI -->
+
+                <a href="/ai_adminassignments"
+                   class="quick-action">
+
+                    <div class="quick-icon">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            AI Assignments
+                        </strong>
+
+                        <span>
+                            Manage AI assignments
+                        </span>
+
+                    </div>
+
+                    <b>
+                        →
+                    </b>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         AI SYSTEM
+    ================================================== -->
+
+    <section class="ai-card">
+
+
+        <div class="ai-icon">
+            🤖
+        </div>
+
+
+        <div class="ai-content">
+
+            <h2>
+                AI Maintenance System
+            </h2>
+
+            <p>
+                The AI analyzes maintenance problems,
+                worker skills, availability, location and
+                workload to recommend the most suitable
+                technician for each task.
+            </p>
+
+        </div>
+
+
+        <a href="/ai_adminassignments"
+           class="ai-button">
+
+            View AI Assignments
+
+        </a>
+
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

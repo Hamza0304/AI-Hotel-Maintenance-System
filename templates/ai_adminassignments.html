@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Assignments</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/ai_adminassignments.css') }}">
+
+</head>
+
+<body>
+
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="/supervisor/dashboard" class="menu-item">
+            📊 <span>Dashboard</span>
+        </a>
+
+        <a href="/supervisor/reports" class="menu-item">
+            📋 <span>Reports</span>
+        </a>
+
+        <a href="/supervisor/ai" class="menu-item active">
+            🤖 <span>AI Assignments</span>
+        </a>
+
+        <a href="/supervisor/workers" class="menu-item">
+            👨‍🔧 <span>Workers</span>
+        </a>
+
+        <a href="/supervisor/notifications" class="menu-item">
+            🔔 <span>Notifications</span>
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout" class="logout">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<main class="main-content">
+
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>AI Assignments</h1>
+
+            <p>
+                AI-powered maintenance worker selection.
+            </p>
+
+        </div>
+
+
+        <div class="ai-status">
+
+            <span></span>
+
+            AI System Online
+
+        </div>
+
+    </header>
+
+
+
+    <!-- AI SUMMARY -->
+
+    <section class="summary-grid">
+
+        <div class="summary-card">
+
+            <span>Pending Reports</span>
+
+            <strong>4</strong>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <span>AI Assigned</span>
+
+            <strong class="blue">18</strong>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <span>Completed</span>
+
+            <strong class="green">31</strong>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <span>Average Match</span>
+
+            <strong>92%</strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ACTIVE ASSIGNMENT -->
+
+    <section class="assignment-card">
+
+
+        <div class="assignment-header">
+
+            <div>
+
+                <span class="priority">
+                    HIGH PRIORITY
+                </span>
+
+                <h2>
+                    Room 305 — Air Conditioning
+                </h2>
+
+                <p>
+                    Air conditioning is not working properly.
+                </p>
+
+            </div>
+
+
+            <span class="new">
+                NEW
+            </span>
+
+        </div>
+
+
+
+        <!-- PROBLEM -->
+
+        <div class="problem">
+
+            <div class="problem-icon">
+                ❄️
+            </div>
+
+            <div>
+
+                <span>
+                    REPORTED PROBLEM
+                </span>
+
+                <h3>
+                    HVAC / Air Conditioning
+                </h3>
+
+                <p>
+                    Guest reported that the room AC
+                    stopped cooling.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- AI DECISION -->
+
+        <div class="ai-decision">
+
+            <div class="ai-title">
+
+                <div class="ai-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <span>
+                        AI RECOMMENDATION
+                    </span>
+
+                    <h2>
+                        Ahmed Hassan
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="match">
+
+                <strong>
+                    94%
+                </strong>
+
+                <span>
+                    Match Score
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- REASONS -->
+
+        <div class="reasons">
+
+            <h3>
+                Why did AI choose this worker?
+            </h3>
+
+
+            <div class="reason">
+
+                <span>✓</span>
+
+                <p>
+                    HVAC skill matches the reported problem.
+                </p>
+
+            </div>
+
+
+            <div class="reason">
+
+                <span>✓</span>
+
+                <p>
+                    Worker is currently available.
+                </p>
+
+            </div>
+
+
+            <div class="reason">
+
+                <span>✓</span>
+
+                <p>
+                    Worker is located near Floor 3.
+                </p>
+
+            </div>
+
+
+            <div class="reason">
+
+                <span>✓</span>
+
+                <p>
+                    Current workload is low.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ALTERNATIVES -->
+
+        <div class="alternatives">
+
+            <h3>
+                Other Available Workers
+            </h3>
+
+
+            <div class="alternative">
+
+                <div class="avatar">
+                    M
+                </div>
+
+                <div>
+
+                    <strong>
+                        Mohamed Karim
+                    </strong>
+
+                    <span>
+                        HVAC • Floor 2
+                    </span>
+
+                </div>
+
+                <strong>
+                    81%
+                </strong>
+
+            </div>
+
+
+            <div class="alternative">
+
+                <div class="avatar">
+                    Y
+                </div>
+
+                <div>
+
+                    <strong>
+                        Youssef Amrani
+                    </strong>
+
+                    <span>
+                        General Maintenance • Floor 1
+                    </span>
+
+                </div>
+
+                <strong>
+                    72%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ACTIONS -->
+
+        <div class="actions">
+
+            <button class="assign">
+                ✓ Confirm Assignment
+            </button>
+
+            <button class="manual">
+                Assign Manually
+            </button>
+
+            <button class="reject">
+                Reject Recommendation
+            </button>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- HOW AI WORKS -->
+
+    <section class="ai-process">
+
+        <div class="ai-process-header">
+
+            <div class="big-ai">
+                🤖
+            </div>
+
+            <div>
+
+                <h2>
+                    How the AI Makes Decisions
+                </h2>
+
+                <p>
+                    The system evaluates multiple factors before
+                    recommending a worker.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="process-grid">
+
+
+            <div>
+
+                <span>01</span>
+
+                <h3>
+                    Problem
+                </h3>
+
+                <p>
+                    AI analyzes the reported maintenance problem.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>02</span>
+
+                <h3>
+                    Skills
+                </h3>
+
+                <p>
+                    Checks which workers have the required skills.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>03</span>
+
+                <h3>
+                    Availability
+                </h3>
+
+                <p>
+                    Removes workers who are unavailable or busy.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <span>04</span>
+
+                <h3>
+                    Selection
+                </h3>
+
+                <p>
+                    Selects the worker with the highest overall score.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

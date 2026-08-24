@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Workers & Skills</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/supervisor_workers.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+        <h2>AI Hotel</h2>
+        <span>Maintenance System</span>
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="/admin_dashboard" class="menu-item">
+            📊 <span>Dashboard</span>
+        </a>
+
+        <!--<a href="/admin_setup" class="menu-item">
+            ⚙️ <span>Hotel Setup</span>
+        </a>-->
+
+        <a href="/admin_rooms" class="menu-item">
+            🚪 <span>Rooms</span>
+        </a>
+
+        <a href="/admin_workers" class="menu-item active">
+            👨‍🔧 <span>Workers</span>
+        </a>
+
+        <a href="/admin_import" class="menu-item">
+            📥 <span>Import Data</span>
+        </a>
+
+        <a href="/admin_setup" class="menu-item">
+            🔧 <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout" class="logout">
+            🚪 <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Workers & Skills
+            </h1>
+
+            <p>
+                Manage workers and the skills used by the AI.
+            </p>
+
+        </div>
+
+
+        <a href="{{ url_for('admin_add_workers') }}"
+           class="add-worker">
+
+            + Add Worker
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =================================================
+         STATS
+    ================================================== -->
+
+    <section class="stats">
+
+
+        <div>
+
+            <span>
+                Total Workers
+            </span>
+
+            <strong>
+                {{ total_workers }}
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Available
+            </span>
+
+            <strong class="green">
+                {{ available_workers }}
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Working
+            </span>
+
+            <strong class="orange">
+                {{ working_workers }}
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Offline
+            </span>
+
+            <strong class="red">
+                {{ offline_workers }}
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         FILTER
+    ================================================== -->
+
+    <section class="filter-card">
+
+        <input
+            type="text"
+            id="workerSearch"
+            placeholder="Search worker..."
+        >
+
+
+        <select id="departmentFilter">
+
+            <option value="">
+                All Departments
+            </option>
+
+            <option value="Maintenance">
+                Maintenance
+            </option>
+
+            <option value="HVAC">
+                HVAC
+            </option>
+
+            <option value="Plumbing">
+                Plumbing
+            </option>
+
+            <option value="Electrical">
+                Electrical
+            </option>
+
+            <option value="Engineering">
+                Engineering
+            </option>
+
+            <option value="IT">
+                IT
+            </option>
+
+        </select>
+
+
+        <select id="statusFilter">
+
+            <option value="">
+                All Status
+            </option>
+
+            <option value="Available">
+                Available
+            </option>
+
+            <option value="Working">
+                Working
+            </option>
+
+            <option value="Busy">
+                Busy
+            </option>
+
+            <option value="Offline">
+                Offline
+            </option>
+
+        </select>
+
+    </section>
+
+
+
+    <!-- =================================================
+         WORKERS TABLE
+    ================================================== -->
+
+    <section class="workers-card">
+
+
+        <!-- TABLE HEADER -->
+
+        <div class="table-header">
+
+            <span>
+                Worker
+            </span>
+
+            <span>
+                Department
+            </span>
+
+            <span>
+                Skills
+            </span>
+
+            <span>
+                Phone
+            </span>
+
+            <span>
+                Status
+            </span>
+
+            <span>
+                Actions
+            </span>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DATABASE WORKERS
+        ================================================== -->
+
+        {% for worker in workers %}
+
+
+        <div class="worker-row"
+             data-name="{{ worker.name|lower }}"
+             data-department="{{ worker.department }}"
+             data-status="{{ worker.availability }}">
+
+
+            <!-- WORKER -->
+
+            <div class="worker">
+
+
+                <div class="avatar">
+
+                    {{ worker.name[0]|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ worker.name }}
+                    </strong>
+
+                    <span>
+                        ID: W{{ "%03d"|format(worker.id) }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- DEPARTMENT -->
+
+            <span>
+
+                {{ worker.department or "Not specified" }}
+
+            </span>
+
+
+
+            <!-- SKILLS -->
+
+            <div class="skills">
+
+                {% if worker.skills %}
+
+                    {% for skill in worker.skills.split(',') %}
+
+                        <span>
+                            {{ skill.strip() }}
+                        </span>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <span>
+                        No skills
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <span>
+
+                {{ worker.phone or "Not provided" }}
+
+            </span>
+
+
+
+            <!-- STATUS -->
+
+            {% if worker.availability == "Available" %}
+
+                <span class="status available">
+                    Available
+                </span>
+
+            {% elif worker.availability == "Working" %}
+
+                <span class="status busy">
+                    Working
+                </span>
+
+            {% elif worker.availability == "Busy" %}
+
+                <span class="status busy">
+                    Busy
+                </span>
+
+            {% else %}
+
+                <span class="status unavailable">
+                    Offline
+                </span>
+
+            {% endif %}
+
+
+
+            <!-- ACTION -->
+
+            <a
+                href="{{ url_for('worker_details', worker_id=worker.id) }}"
+                class="view-button"
+            >
+
+                View
+
+            </a>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- NO WORKERS -->
+
+        <div class="no-workers">
+
+            <div>
+                👨‍🔧
+            </div>
+
+            <h3>
+                No workers found
+            </h3>
+
+            <p>
+                Add a worker to start managing your maintenance team.
+            </p>
+
+            <a href="{{ url_for('admin_add_workers') }}"
+               class="add-worker">
+
+                + Add Worker
+
+            </a>
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         AI NOTE
+    ================================================== -->
+
+    <section class="ai-note">
+
+        <div class="ai-icon">
+            🤖
+        </div>
+
+
+        <div>
+
+            <h2>
+                AI Worker Selection
+            </h2>
+
+            <p>
+                The AI uses worker skills, availability,
+                location and current workload to select
+                the most suitable technician.
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     SEARCH & FILTER
+===================================================== -->
+
+<script>
+
+const searchInput =
+    document.getElementById("workerSearch");
+
+const departmentFilter =
+    document.getElementById("departmentFilter");
+
+const statusFilter =
+    document.getElementById("statusFilter");
+
+const workerRows =
+    document.querySelectorAll(".worker-row");
+
+
+function filterWorkers() {
+
+    const search =
+        searchInput.value.toLowerCase();
+
+    const department =
+        departmentFilter.value;
+
+    const status =
+        statusFilter.value;
+
+
+    workerRows.forEach(function(row) {
+
+        const name =
+            row.dataset.name;
+
+        const rowDepartment =
+            row.dataset.department;
+
+        const rowStatus =
+            row.dataset.status;
+
+
+        const matchesSearch =
+            name.includes(search);
+
+
+        const matchesDepartment =
+            department === "" ||
+            rowDepartment === department;
+
+
+        const matchesStatus =
+            status === "" ||
+            rowStatus === status;
+
+
+        if (
+            matchesSearch &&
+            matchesDepartment &&
+            matchesStatus
+        ) {
+
+            row.style.display = "grid";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+searchInput.addEventListener(
+    "input",
+    filterWorkers
+);
+
+
+departmentFilter.addEventListener(
+    "change",
+    filterWorkers
+);
+
+
+statusFilter.addEventListener(
+    "change",
+    filterWorkers
+);
+
+</script>
+
+
+</body>
+
+</html>

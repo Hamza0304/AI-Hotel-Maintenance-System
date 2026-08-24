@@ -1,0 +1,134 @@
+:root {
+    --theme-ink: #172033;
+    --theme-muted: #64748b;
+    --theme-surface: #ffffff;
+    --theme-page: #f3f6fa;
+    --theme-border: #dbe3ec;
+    --theme-navy: #17324d;
+    --theme-blue: #1677a8;
+    --theme-blue-dark: #0f5d83;
+    --theme-teal: #0f8b8d;
+    --theme-danger: #c2414d;
+    --theme-success: #167a59;
+    --theme-radius: 8px;
+    --theme-shadow: 0 10px 28px rgba(23, 50, 77, 0.08);
+}
+
+body {
+    background: var(--theme-page);
+    color: var(--theme-ink);
+}
+
+.sidebar {
+    background: var(--theme-navy) !important;
+}
+
+.sidebar-logo {
+    border-bottom-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.sidebar-logo span,
+.menu-item {
+    color: #c9e4ef !important;
+}
+
+.menu-item:hover {
+    background: rgba(22, 119, 168, 0.28) !important;
+}
+
+.menu-item.active {
+    background: var(--theme-blue) !important;
+}
+
+.main-content,
+.page {
+    color: var(--theme-ink);
+}
+
+.card,
+.settings-card,
+.profile-card,
+.report-card,
+.overview-card,
+.table-container {
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius);
+    box-shadow: var(--theme-shadow);
+}
+
+input,
+select,
+textarea {
+    border-color: var(--theme-border) !important;
+    border-radius: 6px !important;
+    color: var(--theme-ink);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--theme-blue) !important;
+    box-shadow: 0 0 0 3px rgba(22, 119, 168, 0.14) !important;
+    outline: none;
+}
+
+button,
+.save-button,
+.submit-btn,
+.primary-button,
+.edit-btn {
+    background: var(--theme-blue) !important;
+    border-color: var(--theme-blue) !important;
+}
+
+button:hover,
+.save-button:hover,
+.submit-btn:hover,
+.primary-button:hover,
+.edit-btn:hover {
+    background: var(--theme-blue-dark) !important;
+}
+
+.danger-button,
+.delete-btn {
+    background: var(--theme-danger) !important;
+    border-color: var(--theme-danger) !important;
+}
+
+.danger-button:hover,
+.delete-btn:hover {
+    background: #a93540 !important;
+}
+
+.message.success,
+.success-message {
+    color: var(--theme-success);
+}
+
+.message.error,
+.error-message {
+    color: var(--theme-danger);
+}
+
+@media (max-width: 760px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar-menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .menu-item {
+        flex: 1 1 140px;
+    }
+
+    .main-content,
+    .page {
+        margin-left: 0 !important;
+        padding: 20px !important;
+    }
+}

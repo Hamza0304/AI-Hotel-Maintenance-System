@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Worker Details</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/worker_details.css') }}">
+
+</head>
+
+<body>
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <!--<aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <h2>AI Hotel</h2>
+
+            <span>Maintenance System</span>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/supervisor_dashboard"
+               class="menu-item">
+
+                <span>📊</span>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="/supervisor_reports"
+               class="menu-item">
+
+                <span>📋</span>
+                <span>Reports</span>
+
+            </a>
+
+
+            <a href="/supervisor/ai"
+               class="menu-item">
+
+                <span>🤖</span>
+                <span>AI Assignments</span>
+
+            </a>
+
+
+            <a href="/workers"
+               class="menu-item active">
+
+                <span>👨‍🔧</span>
+                <span>Workers</span>
+
+            </a>
+
+
+            <a href="/notifications"
+               class="menu-item">
+
+                <span>🔔</span>
+                <span>Notifications</span>
+
+            </a>
+
+
+            <a href="/supervisor/profile"
+               class="menu-item">
+
+                <span>👤</span>
+                <span>Profile</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="logout-container">
+
+            <a href="/logout" class="logout">
+
+                <span>🚪</span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>-->
+
+
+
+    <!-- ================= MAIN ================= -->
+
+   <main class="main-content">
+
+    <header class="topbar">
+
+        <div>
+
+            <a href="{{ url_for('admin_workers') }}"
+               class="back-button">
+                ← Back to Workers
+            </a>
+
+            <h1>
+                Worker Details
+            </h1>
+
+            <p>
+                View information about this maintenance worker.
+            </p>
+
+        </div>
+
+    </header>
+
+
+   
+
+
+
+
+        <!-- ================= WORKER PROFILE ================= -->
+
+      <section class="profile-card">
+
+        <div class="profile-avatar">
+
+            {{ worker.name[0] }}
+
+        </div>
+
+        <div class="profile-info">
+
+            <h2>
+                {{ worker.name }}
+            </h2>
+
+            <p>
+                {{ worker.department or "No department assigned" }}
+            </p>
+
+            <span class="status {{ worker.availability|lower }}">
+                {{ worker.availability }}
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+        <!-- ================= QUICK STATS ================= -->
+
+        <!-- INFORMATION -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>
+                Worker Information
+            </h2>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info-item">
+
+                <span>Worker ID</span>
+
+                <strong>
+                    W{{ "%03d"|format(worker.id) }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>Full Name</span>
+
+                <strong>
+                    {{ worker.name }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>Phone</span>
+
+                <strong>
+                    {{ worker.phone or "Not provided" }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>Department</span>
+
+                <strong>
+                    {{ worker.department or "Not assigned" }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>Current Tasks</span>
+
+                <strong>
+                    {{ worker.current_tasks }}
+                </strong>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <span>Status</span>
+
+                <strong>
+                    {{ worker.availability }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>
+                Skills
+            </h2>
+
+        </div>
+
+
+        <div class="skills-list">
+
+            {% if worker.skills %}
+
+                {% for skill in worker.skills.split(',') %}
+
+                    <span class="skill">
+                        {{ skill.strip() }}
+                    </span>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>
+                    No skills registered.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- AI INFORMATION -->
+
+    <section class="ai-card">
+
+        <div class="ai-icon">
+            🤖
+        </div>
+
+        <div>
+
+            <h2>
+                AI Worker Profile
+            </h2>
+
+            <p>
+                The AI can use this worker's department,
+                skills, availability and current workload
+                when selecting a technician for a maintenance task.
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+</body>
+
+</html>

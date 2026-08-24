@@ -1,0 +1,772 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f5f7fb;
+
+    color: #1f2937;
+
+    min-height: 100vh;
+
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 250px;
+    height: 100vh;
+
+    background-color: #172554;
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-logo {
+    padding: 30px 25px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-logo h2 {
+    font-size: 23px;
+
+    margin-bottom: 5px;
+}
+
+.sidebar-logo span {
+    font-size: 12px;
+
+    color: #bfdbfe;
+}
+
+.sidebar-menu {
+    padding: 25px 15px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    color: #dbeafe;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.menu-item.active {
+    background-color: #2563eb;
+
+    color: white;
+}
+
+.logout-container {
+    margin-top: auto;
+
+    padding: 15px;
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.logout {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 15px;
+
+    color: #fecaca;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+}
+
+.logout:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.admin-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 22px 10px;
+
+    border-bottom: 1px solid #2d3748;
+
+}
+
+
+.profile-avatar {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #374151;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+
+    color: white;
+
+}
+
+
+.profile-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+}
+
+
+.profile-info strong {
+
+    font-size: 14px;
+
+}
+
+
+.profile-info span {
+
+    font-size: 12px;
+
+    color: #9ca3af;
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+.sidebar-menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-top: 25px;
+
+}
+
+
+.menu-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    text-decoration: none;
+
+    color: #d1d5db;
+
+    padding: 12px 13px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+
+}
+
+
+.menu-item:hover {
+
+    background: #1f2937;
+
+    color: white;
+
+}
+
+
+.menu-item.active {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.menu-icon {
+
+    width: 22px;
+
+    text-align: center;
+
+    font-size: 17px;
+
+}
+
+
+/* =====================================================
+   SIDEBAR BOTTOM
+===================================================== */
+
+.sidebar-bottom {
+
+    margin-top: auto;
+
+}
+
+
+.logout {
+
+    color: #fca5a5;
+
+}
+
+
+.logout:hover {
+
+    background: #3f1d1d;
+
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+
+    margin-left: 250px;
+
+    min-height: 100vh;
+
+    padding: 40px 50px;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.page-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    margin-bottom: 30px;
+
+}
+
+
+.breadcrumb {
+
+    display: flex;
+
+    gap: 8px;
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+
+    color: #9ca3af;
+
+}
+
+
+.breadcrumb a {
+
+    text-decoration: none;
+
+    color: #2563eb;
+
+}
+
+
+.page-header h1 {
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+
+    color: #111827;
+
+}
+
+
+.page-header p {
+
+    color: #6b7280;
+
+    font-size: 15px;
+
+}
+
+
+/* BACK BUTTON */
+
+.back-button {
+
+    text-decoration: none;
+
+    color: #374151;
+
+    border: 1px solid #d1d5db;
+
+    background: white;
+
+    padding: 11px 18px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+
+}
+
+
+.back-button:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.form-card {
+
+    background: white;
+
+    max-width: 850px;
+
+    margin: 0 auto;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+    padding: 35px 40px;
+
+}
+
+
+/* =====================================================
+   FORM HEADER
+===================================================== */
+
+.form-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 25px;
+
+    margin-bottom: 30px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+}
+
+
+.form-icon {
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 10px;
+
+    background: #eff6ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+}
+
+
+.form-header h2 {
+
+    font-size: 20px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.form-header p {
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+form {
+
+    width: 100%;
+
+}
+
+
+.form-group {
+
+    margin-bottom: 22px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+
+    color: #374151;
+
+}
+
+
+.required {
+
+    color: #dc2626;
+
+}
+
+
+.form-group input,
+.form-group select {
+
+    width: 100%;
+
+    height: 46px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    background: white;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+
+}
+
+
+.form-group input::placeholder {
+
+    color: #9ca3af;
+
+}
+
+
+.form-group small {
+
+    display: block;
+
+    margin-top: 7px;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   INFORMATION BOX
+===================================================== */
+
+.information-box {
+
+    display: flex;
+
+    gap: 14px;
+
+    padding: 17px;
+
+    margin-top: 10px;
+
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 8px;
+
+}
+
+
+.information-icon {
+
+    font-size: 22px;
+
+}
+
+
+.information-box strong {
+
+    display: block;
+
+    color: #1e40af;
+
+    margin-bottom: 5px;
+
+}
+
+
+.information-box p {
+
+    color: #4b5563;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   FORM ACTIONS
+===================================================== */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #e5e7eb;
+
+}
+
+
+/* CANCEL */
+
+.cancel-button {
+
+    text-decoration: none;
+
+    padding: 12px 22px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    color: #374151;
+
+    background: white;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+
+}
+
+
+.cancel-button:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+/* SAVE */
+
+.save-button {
+
+    border: none;
+
+    padding: 12px 24px;
+
+    border-radius: 7px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.save-button:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+
+        width: 210px;
+
+    }
+
+    .main-content {
+
+        margin-left: 210px;
+
+        padding: 30px;
+
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+
+    }
+
+
+    .main-content {
+
+        margin-left: 0;
+
+        padding: 25px 18px;
+
+    }
+
+
+    .page-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    .form-card {
+
+        padding: 25px 20px;
+
+    }
+
+}

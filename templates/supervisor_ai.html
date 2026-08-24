@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Supervisor AI</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/supervisor_ai.css') }}"
+    >
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+    <div class="page">
+
+        <div class="header">
+
+            <div>
+
+                <h1>
+                    Supervisor AI
+                </h1>
+
+                <p>
+                    AI-powered maintenance operations analysis
+                </p>
+
+            </div>
+
+            <a
+                href="{{ url_for('supervisor_dashboard') }}"
+                class="back-button"
+            >
+                ← Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Reports
+                </h3>
+
+                <strong>
+                    {{ analysis.total_reports }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card pending">
+
+                <h3>
+                    Pending
+                </h3>
+
+                <strong>
+                    {{ analysis.pending_reports|length }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card progress">
+
+                <h3>
+                    In Progress
+                </h3>
+
+                <strong>
+                    {{ analysis.in_progress_reports|length }}
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card completed">
+
+                <h3>
+                    Completed
+                </h3>
+
+                <strong>
+                    {{ analysis.completed_reports|length }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI RECOMMENDATIONS -->
+
+        <section class="ai-card">
+
+            <div class="section-title">
+
+                <span>
+                    🤖
+                </span>
+
+                <div>
+
+                    <h2>
+                        AI Recommendations
+                    </h2>
+
+                    <p>
+                        Current maintenance situation
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="recommendations">
+
+                {% for recommendation in analysis.recommendations %}
+
+                    <div class="recommendation">
+
+                        {{ recommendation }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- PENDING TASKS -->
+
+        <section class="ai-card">
+
+            <div class="section-title">
+
+                <span>
+                    ⏳
+                </span>
+
+                <div>
+
+                    <h2>
+                        Pending Tasks
+                    </h2>
+
+                    <p>
+                        Tasks waiting for qualified technicians
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if analysis.pending_reports %}
+
+                <div class="task-list">
+
+                    {% for task in analysis.pending_reports %}
+
+                        <div class="task">
+
+                            <div>
+
+                                <strong>
+                                    Task #{{ task.id }}
+                                </strong>
+
+                                <p>
+                                    Room {{ task.room_number }}
+                                    —
+                                    {{ task.category }}
+                                </p>
+
+                                <small>
+                                    {{ task.issue_description }}
+                                </small>
+
+                            </div>
+
+
+                            <div class="task-right">
+
+                                <span
+                                    class="priority {{ task.priority|lower }}"
+                                >
+                                    {{ task.priority }}
+                                </span>
+
+                                <span class="status">
+                                    {{ task.status }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="empty">
+
+                    ✅ No pending maintenance tasks.
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- WORKERS -->
+
+        <section class="ai-card">
+
+            <div class="section-title">
+
+                <span>
+                    👷
+                </span>
+
+                <div>
+
+                    <h2>
+                        Technician Workload
+                    </h2>
+
+                    <p>
+                        Current technician availability
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="worker-list">
+
+                {% for worker in analysis.available_workers %}
+
+                    <div class="worker available">
+
+                        <div>
+
+                            <strong>
+                                {{ worker.name }}
+                            </strong>
+
+                            <p>
+                                Available
+                            </p>
+
+                        </div>
+
+                        <span>
+                            {{ worker.current_tasks or 0 }}
+                            tasks
+                        </span>
+
+                    </div>
+
+                {% endfor %}
+
+
+                {% for worker in analysis.working_workers %}
+
+                    <div class="worker working">
+
+                        <div>
+
+                            <strong>
+                                {{ worker.name }}
+                            </strong>
+
+                            <p>
+                                Working
+                            </p>
+
+                        </div>
+
+                        <span>
+                            {{ worker.current_tasks or 0 }}
+                            tasks
+                        </span>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+        <!-- REFRESH -->
+
+        <div class="refresh">
+
+            <a
+                href="{{ url_for('supervisor_ai') }}"
+                class="refresh-button"
+            >
+                🔄 Refresh AI Analysis
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

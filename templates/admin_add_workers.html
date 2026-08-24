@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Worker - AI Hotel Maintenance System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_add_workers.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+
+<body>
+
+
+
+
+    <!-- ADMIN PROFILE -->
+
+   <!---<div class="admin-profile">
+
+        <div class="profile-avatar">
+            {{ session.get("username", "A")[0] | upper }}
+        </div>
+
+        <div class="profile-info">
+
+            <strong>
+                {{ session.get("username", "Administrator") }}
+            </strong>
+
+            <span>
+                Administrator
+            </span>
+
+        </div>
+
+    </div>-->
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <!--<aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <h2>AI Hotel</h2>
+
+            <span>Maintenance System</span>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="/admin_dashboard" class="menu-item">
+
+                <span>📊</span>
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="/admin_setup" class="menu-item active">
+
+                <span>⚙️</span>
+                <span>Hotel Setup</span>
+
+            </a>
+
+
+            <a href="/admin_rooms" class="menu-item">
+
+                <span>🚪</span>
+                <span>Rooms</span>
+
+            </a>
+
+
+            <a href="/admin_workers" class="menu-item">
+
+                <span>👨‍🔧</span>
+                <span>Workers</span>
+
+            </a>
+
+
+            <a href="/admin/import" class="menu-item">
+
+                <span>📥</span>
+                <span>Import Data</span>
+
+            </a>
+
+
+            <a href="/admin/settings" class="menu-item">
+
+                <span>🔧</span>
+                <span>Settings</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="logout-container">
+
+            <a href="/logout" class="logout">
+
+                <span>🚪</span>
+
+                <span>Logout</span>
+
+            </a>
+
+        </div>
+
+    </aside>-->
+
+    <!-- LOGOUT -->
+
+<!---
+   <div class="sidebar-bottom">
+
+        <a href="/logout"
+           class="menu-item logout">
+
+            <span class="menu-icon">
+                🚪
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- HEADER -->
+
+    <header class="page-header">
+
+        <div>
+
+            <div class="breadcrumb">
+
+                <a href="/admin_workers">
+                    Workers
+                </a>
+
+                <span>
+                    /
+                </span>
+
+                <span>
+                    Add Worker
+                </span>
+
+            </div>
+
+
+            <h1>
+                Add New Worker
+            </h1>
+
+            <p>
+                Register a maintenance worker in the hotel system.
+            </p>
+
+        </div>
+
+
+        <a href="/admin_workers"
+           class="back-button">
+
+            ← Back to Workers
+
+        </a>
+
+    </header>
+
+
+
+    <!-- =================================================
+         FORM CARD
+    ================================================== -->
+
+    <section class="form-card">
+
+
+        <div class="form-header">
+
+            <div class="form-icon">
+                👨‍🔧
+            </div>
+
+            <div>
+
+                <h2>
+                    Worker Information
+                </h2>
+
+                <p>
+                    Enter the worker's information below.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- FORM -->
+
+        <form action="/admin_add_worker"
+              method="POST">
+
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+
+                    Worker Name
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. Ahmed Hassan"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label for="phone">
+
+                    Phone Number
+
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="e.g. 0600000000"
+                >
+
+            </div>
+
+
+
+            <!-- DEPARTMENT -->
+
+            <div class="form-group">
+
+                <label for="department">
+
+                    Department
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+
+                <select
+                    id="department"
+                    name="department"
+                    required
+                >
+
+                    <option value="">
+                        Select Department
+                    </option>
+
+                    <option value="Maintenance">
+                        Maintenance
+                    </option>
+
+                    <option value="Housekeeping">
+                        Housekeeping
+                    </option>
+
+                    <option value="Electrical">
+                        Electrical
+                    </option>
+
+                    <option value="Plumbing">
+                        Plumbing
+                    </option>
+
+                    <option value="HVAC">
+                        HVAC
+                    </option>
+
+                    <option value="IT">
+                        IT
+                    </option>
+
+                    <option value="Engineering">
+                        Engineering
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- SKILLS -->
+
+            <div class="form-group">
+
+                <label for="skills">
+
+                    Skills
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="skills"
+                    name="skills"
+                    placeholder="e.g. HVAC, Electrical, Air Conditioning"
+                    required
+                >
+
+
+                <small>
+                    Separate multiple skills with commas.
+                </small>
+
+            </div>
+
+
+
+            <!-- AVAILABILITY -->
+
+            <div class="form-group">
+
+                <label for="availability">
+
+                    Availability
+
+                    <span class="required">
+                        *
+                    </span>
+
+                </label>
+
+
+                <select
+                    id="availability"
+                    name="availability"
+                    required
+                >
+
+                    <option value="Available">
+                        Available
+                    </option>
+
+                    <option value="Working">
+                        Working
+                    </option>
+
+                    <option value="Busy">
+                        Busy
+                    </option>
+
+                    <option value="Offline">
+                        Offline
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- CURRENT TASKS -->
+
+            <div class="form-group">
+
+                <label for="current_tasks">
+
+                    Current Tasks
+
+                </label>
+
+
+                <input
+                    type="number"
+                    id="current_tasks"
+                    name="current_tasks"
+                    value="0"
+                    min="0"
+                >
+
+
+                <small>
+                    New workers normally start with 0 active tasks.
+                </small>
+
+            </div>
+
+
+
+            <!-- INFORMATION BOX -->
+
+            <div class="information-box">
+
+                <div class="information-icon">
+                    🤖
+                </div>
+
+                <div>
+
+                    <strong>
+                        AI Assignment
+                    </strong>
+
+                    <p>
+                        The worker's skills, availability and
+                        current workload will later be used by
+                        the AI to recommend the best worker for
+                        each maintenance problem.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+                <a href="/admin_workers"
+                   class="cancel-button">
+
+                    Cancel
+
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="save-button"
+                >
+
+                    ✓ Add Worker
+
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

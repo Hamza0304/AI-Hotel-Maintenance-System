@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Hotel Setup</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin_setup.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="/admin_dashboard" class="menu-item">
+
+            <span>📊</span>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="/admin_setup" class="menu-item active">
+
+            <span>⚙️</span>
+            <span>Hotel Setup</span>
+
+        </a>
+
+
+        <a href="/admin_rooms" class="menu-item">
+
+            <span>🚪</span>
+            <span>Rooms</span>
+
+        </a>
+
+
+        <a href="/admin_workers" class="menu-item">
+
+            <span>👨‍🔧</span>
+            <span>Workers</span>
+
+        </a>
+
+
+          <a
+            href="/admin_staff_accounts" class="menu-item">
+                <span>👥</span>
+                <span>Staff Accounts</span>
+        </a>
+
+
+        <a href="/admin_import" class="menu-item">
+
+            <span>📥</span>
+            <span>Import Data</span>
+
+        </a>
+
+
+        <a href="/admin_settings" class="menu-item">
+
+            <span>🔧</span>
+            <span>Settings</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout" class="logout">
+
+            <span>🚪</span>
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Hotel Setup</h1>
+
+            <p>
+                Configure the hotel information used by the AI
+                maintenance system.
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= SETUP PROGRESS ================= -->
+
+    <section class="setup-progress">
+
+        <div class="progress-info">
+
+            <div>
+
+                <span>
+                    SYSTEM SETUP
+                </span>
+
+                <h2>
+                    Hotel Configuration
+                </h2>
+
+            </div>
+
+
+            <div class="progress-number">
+
+                <strong>1</strong>
+
+                <span>
+                    / 3 Steps
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-bar">
+
+            <div class="progress-fill"></div>
+
+        </div>
+
+
+        <div class="progress-text">
+
+            Step 1 — Hotel Information
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= HOTEL INFORMATION ================= -->
+
+    <section class="card">
+
+
+        <div class="card-header">
+
+            <div class="section-icon">
+                🏨
+            </div>
+
+            <div>
+
+                <h2>
+                    Hotel Information
+                </h2>
+
+                <p>
+                    Enter the basic information about your hotel.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <form
+            action="{{ url_for('save_hotel') }}"
+            method="POST"
+        >
+
+
+            <div class="form-grid">
+
+
+                <!-- HOTEL NAME -->
+
+                <div class="form-group full">
+
+                    <label for="hotel_name">
+
+                        Hotel Name
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="hotel_name"
+                        name="hotel_name"
+                        placeholder="e.g. AI Hotel Marrakech"
+                        value="{{ hotel.hotel_name if hotel else '' }}"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- ADDRESS -->
+
+                <div class="form-group full">
+
+                    <label for="address">
+
+                        Hotel Address
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        placeholder="Enter hotel address"
+                        value="{{ hotel.address if hotel else '' }}"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- FLOORS -->
+
+                <div class="form-group">
+
+                    <label for="floors">
+
+                        Number of Floors
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="floors"
+                        name="floors"
+                        min="1"
+                        placeholder="e.g. 6"
+                        value="{{ hotel.floors if hotel else '' }}"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- ROOMS -->
+
+                <div class="form-group">
+
+                    <label for="rooms">
+
+                        Total Number of Rooms
+
+                        <span>*</span>
+
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="rooms"
+                        name="rooms"
+                        min="1"
+                        placeholder="e.g. 120"
+                        value="{{ hotel.rooms if hotel else '' }}"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+
+                Save Hotel Information
+
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- ================= HOTEL STRUCTURE ================= -->
+
+    <section class="card">
+
+
+        <div class="card-header">
+
+            <div class="section-icon">
+                🏢
+            </div>
+
+            <div>
+
+                <h2>
+                    Hotel Structure
+                </h2>
+
+                <p>
+                    Configure floors and rooms for the hotel.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="structure-options">
+
+
+            <!-- MANUAL -->
+
+            <div class="structure-option">
+
+                <div class="option-icon">
+                    ✏️
+                </div>
+
+                <div class="option-content">
+
+                    <h3>
+                        Manual Setup
+                    </h3>
+
+                    <p>
+                        Add floors and rooms manually.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/admin_rooms"
+                    class="option-button"
+                >
+
+                    Configure
+
+                </a>
+
+            </div>
+
+
+
+            <!-- EXCEL -->
+
+            <div class="structure-option">
+
+                <div class="option-icon green">
+                    📊
+                </div>
+
+                <div class="option-content">
+
+                    <h3>
+                        Excel Import
+                    </h3>
+
+                    <p>
+                        Upload an Excel file containing rooms and floors.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/admin_import"
+                    class="option-button"
+                >
+
+                    Upload
+
+                </a>
+
+            </div>
+
+
+
+            <!-- PMS -->
+
+            <div class="structure-option">
+
+                <div class="option-icon purple">
+                    🔗
+                </div>
+
+                <div class="option-content">
+
+                    <h3>
+                        PMS Integration
+                    </h3>
+
+                    <p>
+                        Import hotel information from an existing PMS.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="option-button disabled"
+                    disabled
+                >
+
+                    Connect
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= WORKERS ================= -->
+
+    <section class="card">
+
+
+        <div class="card-header">
+
+            <div class="section-icon">
+                👨‍🔧
+            </div>
+
+            <div>
+
+                <h2>
+                    Maintenance Workers
+                </h2>
+
+                <p>
+                    Add the workers that the AI can assign
+                    to maintenance tasks.
+                </p>
+
+            </div>
+
+
+            <a
+                href="/admin_workers"
+                class="header-button"
+            >
+
+                Manage Workers
+
+            </a>
+
+        </div>
+
+
+
+        <!-- WORKER STATISTICS -->
+
+        <div class="worker-summary">
+
+
+            <div class="worker-stat">
+
+                <span>
+                    Total Workers
+                </span>
+
+                <strong>
+                    {{ total_workers }}
+                </strong>
+
+            </div>
+
+
+            <div class="worker-stat">
+
+                <span>
+                    Available
+                </span>
+
+                <strong class="green">
+                    {{ available_workers }}
+                </strong>
+
+            </div>
+
+
+            <div class="worker-stat">
+
+                <span>
+                    Busy
+                </span>
+
+                <strong class="orange">
+                    {{ busy_workers }}
+                </strong>
+
+            </div>
+
+
+            <div class="worker-stat">
+
+                <span>
+                    Unavailable
+                </span>
+
+                <strong class="red">
+                    {{ offline_workers }}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= REAL WORKERS ================= -->
+
+        {% if workers %}
+
+            {% for worker in workers %}
+
+            <div class="worker-example">
+
+
+                <div class="worker-avatar">
+
+                    {{ worker.name[0]|upper }}
+
+                </div>
+
+
+                <div class="worker-info">
+
+                    <strong>
+
+                        {{ worker.name }}
+
+                    </strong>
+
+
+                    <span>
+
+                        {{ worker.department or "Maintenance" }}
+
+                    </span>
+
+                </div>
+
+
+                <span class="skill">
+
+                    {{ worker.skills or "General Maintenance" }}
+
+                </span>
+
+
+                <span class="worker-location">
+
+                    {{ worker.current_tasks }} task(s)
+
+                </span>
+
+
+                {% if worker.availability == "Available" %}
+
+                    <span class="status available">
+                        Available
+                    </span>
+
+                {% elif worker.availability == "Busy" %}
+
+                    <span class="status busy">
+                        Busy
+                    </span>
+
+                {% else %}
+
+                    <span class="status unavailable">
+                        {{ worker.availability }}
+                    </span>
+
+                {% endif %}
+
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty-workers">
+
+                <p>
+                    No workers have been added yet.
+                </p>
+
+                <a href="/admin_add_workers">
+                    + Add Worker
+                </a>
+
+            </div>
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- ================= AI INFORMATION ================= -->
+
+    <section class="ai-info">
+
+
+        <div class="ai-icon">
+            🤖
+        </div>
+
+
+        <div class="ai-content">
+
+            <span>
+                WHY THIS INFORMATION IS IMPORTANT
+            </span>
+
+            <h2>
+                The AI needs accurate hotel data to assign
+                workers correctly.
+            </h2>
+
+            <p>
+
+                Hotel floors, rooms, worker skills,
+                availability, location and workload will
+                be used by the AI when selecting the best
+                worker for each maintenance problem.
+
+            </p>
+
+        </div>
+
+
+        <div class="ai-flow">
+
+            <span>
+                Problem
+            </span>
+
+            <strong>
+                →
+            </strong>
+
+            <span>
+                AI
+            </span>
+
+            <strong>
+                →
+            </strong>
+
+            <span>
+                Worker
+            </span>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

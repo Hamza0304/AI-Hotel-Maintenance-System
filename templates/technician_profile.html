@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Technician Profile</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/technician_profile.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="/Technician_Dashboard"
+           class="menu-item">
+
+            <span>📊</span>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!--<a href="/task_details"
+           class="menu-item">
+
+            <span>🔧</span>
+            <span>My Tasks</span>
+
+        </a>-->
+
+
+        <a href="/technician_history"
+           class="menu-item">
+
+            <span>📋</span>
+            <span>History</span>
+
+        </a>
+
+
+        <a href="/technician_notifications"
+           class="menu-item">
+
+            <span>🔔</span>
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="/technician-profile"
+           class="menu-item active">
+
+            <span>👤</span>
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout" class="logout">
+
+            <span>🚪</span>
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>My Profile</h1>
+
+            <p>
+                Manage your technician account information.
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         PROFILE LAYOUT
+    ================================================== -->
+
+    <section class="profile-grid">
+
+
+        <!-- =================================================
+             PROFILE CARD
+        ================================================== -->
+
+        <div class="profile-card">
+
+            <div class="profile-header">
+
+                <div class="profile-avatar">
+
+                    {{ username[:1]|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        {{ username }}
+                    </h2>
+
+                    <span>
+                        Technician
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="profile-divider"></div>
+
+
+            <div class="profile-information">
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Username
+                    </span>
+
+                    <strong>
+                        {{ username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Email
+                    </span>
+
+                    <strong>
+                        {{ email or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Phone
+                    </span>
+
+                    <strong>
+                        {{ phone or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-item">
+
+                    <span class="info-label">
+                        Department
+                    </span>
+
+                    <strong>
+                        {{ department or "Maintenance" }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             UPDATE PROFILE
+        ================================================== -->
+
+        <div class="settings-card">
+
+            <div class="card-header">
+
+                <h2>
+                    Personal Information
+                </h2>
+
+                <p>
+                    Update your account information.
+                </p>
+
+            </div>
+
+
+            <form action="/technician/update-profile"
+                  method="POST">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        value="{{ username }}"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        value="{{ email or '' }}"
+                        placeholder="example@email.com">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone
+                    </label>
+
+                    <input
+                        type="text"
+                        name="phone"
+                        value="{{ phone or '' }}"
+                        placeholder="06XXXXXXXX">
+
+                </div>
+
+
+                <button type="submit"
+                        class="primary-button">
+
+                    Save Changes
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CHANGE PASSWORD
+        ================================================== -->
+
+        <div class="settings-card password-card">
+
+            <div class="card-header">
+
+                <h2>
+                    Change Password
+                </h2>
+
+                <p>
+                    Keep your account secure with a strong password.
+                </p>
+
+            </div>
+
+
+            <form action="/technician/change-password"
+                  method="POST">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="current_password"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="new_password"
+                        minlength="6"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Confirm New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        name="confirm_password"
+                        minlength="6"
+                        required>
+
+                </div>
+
+
+                <button type="submit"
+                        class="password-button">
+
+                    Change Password
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

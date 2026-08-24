@@ -1,0 +1,603 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 250px;
+    height: 100vh;
+
+    background: #111827;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px 18px;
+
+    z-index: 1000;
+}
+
+
+/* LOGO */
+
+.sidebar-logo {
+    padding: 5px 12px 30px;
+    border-bottom: 1px solid #273244;
+}
+
+.sidebar-logo h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.sidebar-logo span {
+    font-size: 13px;
+    color: #9ca3af;
+}
+
+
+/* MENU */
+
+.sidebar-menu {
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.menu-item {
+    text-decoration: none;
+    color: #9ca3af;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 14px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.menu-item:hover {
+    background: #1f2937;
+    color: white;
+}
+
+.menu-item.active {
+    background: #2563eb;
+    color: white;
+}
+
+
+/* LOGOUT */
+
+.logout-container {
+    margin-top: auto;
+}
+
+.logout {
+    text-decoration: none;
+    color: #9ca3af;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 14px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+.logout:hover {
+    background: #1f2937;
+    color: #ef4444;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+    margin-left: 250px;
+
+    min-height: 100vh;
+
+    padding: 35px 45px;
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-start;
+
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 30px;
+
+    margin-top: 12px;
+    margin-bottom: 8px;
+
+    color: #111827;
+}
+
+.topbar p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+
+/* BACK BUTTON */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
+    color: #2563eb;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.back-button:hover {
+    color: #1d4ed8;
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.profile-card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    padding: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+
+/* PROFILE AVATAR */
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    flex-shrink: 0;
+}
+
+
+/* PROFILE INFO */
+
+.profile-info h2 {
+    font-size: 25px;
+
+    color: #111827;
+
+    margin-bottom: 7px;
+}
+
+.profile-info p {
+    color: #6b7280;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* AVAILABLE */
+
+.status.available {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+/* WORKING */
+
+.status.working {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+
+/* BUSY */
+
+.status.busy {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+
+/* OFFLINE */
+
+.status.offline {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* UNAVAILABLE */
+
+.status.unavailable {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+
+/* =====================================================
+   GENERAL CARD
+===================================================== */
+
+.card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+
+/* CARD HEADER */
+
+.card-header {
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+.card-header h2 {
+    font-size: 19px;
+
+    color: #111827;
+}
+
+
+/* =====================================================
+   INFORMATION GRID
+===================================================== */
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.info-item {
+    background: #f8fafc;
+
+    border: 1px solid #edf0f4;
+
+    border-radius: 10px;
+
+    padding: 18px;
+}
+
+
+.info-item span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    margin-bottom: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+
+.info-item strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 15px;
+
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.skills-list {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+
+.skill {
+    background: #eff6ff;
+
+    color: #2563eb;
+
+    border: 1px solid #dbeafe;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.skills-list p {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   AI CARD
+===================================================== */
+
+.ai-card {
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #f5f3ff
+    );
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 14px;
+
+    padding: 25px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+}
+
+
+.ai-icon {
+    width: 48px;
+    height: 48px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+
+    flex-shrink: 0;
+}
+
+
+.ai-card h2 {
+    font-size: 18px;
+
+    color: #111827;
+
+    margin-bottom: 7px;
+}
+
+
+.ai-card p {
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    max-width: 800px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        margin-left: 210px;
+
+        padding: 30px;
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 750px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+        height: auto;
+
+        padding: 15px;
+    }
+
+    .sidebar-menu {
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+    .logout-container {
+        margin-top: 15px;
+    }
+
+    .main-content {
+        margin-left: 0;
+
+        padding: 25px 18px;
+    }
+
+    .topbar {
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .profile-card {
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ai-card {
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .sidebar-menu {
+        flex-direction: column;
+    }
+
+    .profile-card {
+        padding: 22px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .topbar h1 {
+        font-size: 25px;
+    }
+
+    .profile-avatar {
+        width: 75px;
+        height: 75px;
+
+        font-size: 28px;
+    }
+}

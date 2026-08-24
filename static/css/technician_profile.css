@@ -1,0 +1,471 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f5f7fb;
+
+    color: #1f2937;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+
+    position: fixed;
+
+    left: 0;
+
+    top: 0;
+
+    width: 250px;
+
+    height: 100vh;
+
+    background-color: #172554;
+
+    color: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    z-index: 1000;
+
+}
+
+
+.sidebar-logo {
+
+    padding: 30px 25px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+
+}
+
+
+.sidebar-logo h2 {
+
+    font-size: 23px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.sidebar-logo span {
+
+    font-size: 12px;
+
+    color: #bfdbfe;
+
+}
+
+
+.sidebar-menu {
+
+    padding: 25px 15px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.menu-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    color: #dbeafe;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+}
+
+
+.menu-item:hover {
+
+    background-color: rgba(255,255,255,0.1);
+
+}
+
+
+.menu-item.active {
+
+    background-color: #2563eb;
+
+    color: white;
+
+}
+
+
+.logout-container {
+
+    margin-top: auto;
+
+    padding: 15px;
+
+    border-top: 1px solid rgba(255,255,255,0.1);
+
+}
+
+
+.logout {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px 15px;
+
+    color: #fecaca;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+}
+
+
+.logout:hover {
+
+    background-color: rgba(255,255,255,0.1);
+
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main-content {
+    margin-left: 250px;
+
+    min-height: 100vh;
+
+    padding: 30px 35px;
+}
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+    margin-bottom: 30px;
+}
+
+.topbar h1 {
+    font-size: 28px;
+
+    margin-bottom: 7px;
+}
+
+.topbar p {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =====================================================
+   PROFILE GRID
+===================================================== */
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1.5fr;
+
+    gap: 22px;
+
+    max-width: 1100px;
+}
+
+
+/* =====================================================
+   PROFILE CARD
+===================================================== */
+
+.profile-card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    grid-row: span 2;
+}
+
+.profile-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+}
+
+.profile-avatar {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+
+    font-weight: bold;
+}
+
+.profile-header h2 {
+    font-size: 20px;
+
+    margin-bottom: 5px;
+}
+
+.profile-header span {
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+.profile-divider {
+    height: 1px;
+
+    background: #e5e7eb;
+
+    margin: 28px 0;
+}
+
+
+/* INFORMATION */
+
+.profile-information {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.info-label {
+    color: #9ca3af;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    font-weight: 600;
+}
+
+.info-item strong {
+    font-size: 14px;
+
+    color: #374151;
+}
+
+
+/* =====================================================
+   SETTINGS CARD
+===================================================== */
+
+.settings-card {
+    background: white;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    padding: 28px;
+}
+
+.card-header {
+    margin-bottom: 22px;
+}
+
+.card-header h2 {
+    font-size: 18px;
+
+    margin-bottom: 6px;
+}
+
+.card-header p {
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.form-group input {
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.primary-button,
+.password-button {
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 11px 18px;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.primary-button {
+    background: #2563eb;
+}
+
+.primary-button:hover {
+    background: #1d4ed8;
+}
+
+.password-button {
+    background: #374151;
+}
+
+.password-button:hover {
+    background: #111827;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        grid-row: auto;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+    }
+
+    .sidebar-menu {
+        display: flex;
+
+        overflow-x: auto;
+    }
+
+    .menu-item {
+        white-space: nowrap;
+    }
+
+    .logout-container {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0;
+
+        padding: 25px 20px;
+    }
+
+}

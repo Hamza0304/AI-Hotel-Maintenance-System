@@ -1,0 +1,223 @@
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            color: #1f2937;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .report-card {
+            display: flex;
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Left side */
+        .info-section {
+            width: 35%;
+            background-color: #eef4ff;
+            padding: 45px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .info-section .icon {
+            font-size: 70px;
+            margin-bottom: 25px;
+        }
+
+        .info-section h2 {
+            font-size: 25px;
+            margin-bottom: 15px;
+            color: #172554;
+        }
+
+        .info-section p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Right side */
+        .form-section {
+            width: 65%;
+            padding: 45px;
+        }
+
+        .form-section h1 {
+            font-size: 30px;
+            color: #172554;
+            margin-bottom: 10px;
+        }
+
+        .form-section .subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-group {
+            flex: 1;
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #334155;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .upload-box {
+            border: 2px dashed #cbd5e1;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            color: #64748b;
+            cursor: pointer;
+        }
+
+        .upload-box:hover {
+            border-color: #2563eb;
+            background-color: #f8fbff;
+        }
+
+        .upload-box input {
+            border: none;
+            padding: 10px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .required {
+            color: red;
+        }
+/* Information boxes */
+
+.info-box,
+.emergency-box {
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.info-box {
+    background-color: #ffffff;
+    border: 1px solid #dbeafe;
+}
+
+.info-box h3,
+.emergency-box h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.info-box p,
+.emergency-box p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.emergency-box {
+    background-color: #fff7ed;
+    border: 1px solid #fed7aa;
+}
+
+.emergency-box h3 {
+    color: #c2410c;
+}
+
+.emergency-box a {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #c2410c;
+    text-decoration: none;
+}
+
+.emergency-box a:hover {
+    text-decoration: underline;
+}
+        /* Mobile */
+        @media (max-width: 768px) {
+
+            .container {
+                margin: 20px auto;
+            }
+
+            .report-card {
+                flex-direction: column;
+            }
+
+            .info-section,
+            .form-section {
+                width: 100%;
+            }
+
+            .form-section {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+   

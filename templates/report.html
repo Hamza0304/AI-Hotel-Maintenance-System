@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Maintenance Problem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/report.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="report-card">
+
+            <!-- LEFT SIDE -->
+            <div class="info-section">
+
+                <div class="icon">
+                    👨‍🔧
+                </div>
+
+                <h2>We take care of it quickly.</h2>
+
+                <p>
+                    Thank you for helping us improve our hotel.
+                    Please provide the details of the maintenance problem
+                    and our system will take care of the rest.
+                </p>
+
+
+                <!-- EXAMPLE BOX -->
+                <div class="info-box">
+
+                    <h3>💡 Example</h3>
+
+                    <p>
+                        <strong>Room 305 floor 3:</strong><br>
+                        <strong>category:</strong> HVAC / Air Conditioning<br>
+                        "The air conditioner is not working
+                        and the room is very hot."
+                    </p>
+
+                </div>
+
+
+                <!-- EMERGENCY NUMBER BOX -->
+                <div class="emergency-box">
+
+                    <h3>🚨 Emergency?</h3>
+
+                    <p>
+                        For urgent emergencies, please call:
+                    </p>
+
+                    <a href="tel:+212600000000">
+                        📞 +212 600-000-000
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <div class="form-section">
+
+                <h1>Report a Maintenance Problem</h1>
+
+                <p class="subtitle">
+                    Please provide the details of the issue.
+                </p>
+
+
+                <form action="/submit_report" method="post"
+                    enctype="multipart/form-data">
+
+
+                    <!-- ROOM + CATEGORY -->
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="room_number">
+                                Room Number <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="room_number"
+                                name="room_number"
+                                placeholder="e.g. 305"
+                                required
+                            >
+
+                            <br><br>
+                                <!-- FLOOR NUMBER -->
+                            <label for="floor_number">
+                                Floor Number <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="floor_number"
+                                name="floor_number"
+                                placeholder="e.g. 3"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="category">Problem Category</label>
+
+<select
+    id="category"
+    name="category"
+    required
+>
+
+    <option value="" disabled selected>
+        Select a category
+    </option>
+
+    <option value="plumbing">
+        Plumbing
+    </option>
+
+    <option value="electrical">
+        Electrical
+    </option>
+
+    <option value="hvac">
+        HVAC
+    </option>
+
+    <option value="door">
+        Door
+    </option>
+
+    <option value="furniture">
+        Furniture
+    </option>
+
+    <option value="tv">
+        TV
+    </option>
+
+    <option value="other">
+        Other
+    </option>
+
+</select>
+
+                            
+                        </div>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+                    <div class="form-group">
+
+                        <label for="issue_description">
+                            Problem Description
+                            <span class="required">*</span>
+                        </label>
+
+                        <textarea
+                            id="issue_description"
+                            name="issue_description"
+                            placeholder="Describe the problem..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- PHOTO -->
+                    <div class="form-group">
+
+                        <label for="photo">
+                            Add Photo <span>(Optional)</span>
+                        </label>
+
+                        <div class="upload-box">
+
+                            📷
+
+                            <p>
+                                Click to upload or drag and drop
+                            </p>
+
+                            <small>
+                                JPG, PNG up to 5MB
+                            </small>
+
+                            <input
+                                type="file"
+                                id="photo"
+                                name="photo"
+                                accept="image/png, image/jpeg"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                    >
+                        Submit Report
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

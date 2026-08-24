@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Task History - Technician</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/technician_history.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="/Technician_Dashboard"
+           class="menu-item">
+
+            <span>📊</span>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!--<a href="/task_details"
+           class="menu-item">
+
+            <span>🔧</span>
+            <span>My Tasks</span>
+
+        </a>-->
+
+        <a href="/technician_history"
+           class="menu-item active">
+
+            <span>📋</span>
+            <span>History</span>
+
+        </a>
+
+
+        <a href="/technician_notifications"
+           class="menu-item">
+
+            <span>🔔</span>
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="/technician_profile"
+           class="menu-item">
+
+            <span>👤</span>
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout" class="logout">
+
+            <span>🚪</span>
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Task History</h1>
+
+            <p>
+                View your previously completed maintenance tasks.
+            </p>
+
+        </div>
+
+
+        <div class="user-info">
+
+            <div class="user-avatar">
+                {{ username[:1]|upper }}
+            </div>
+
+            <div>
+
+                <strong>
+                    {{ username }}
+                </strong>
+
+                <span>
+                    Technician
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         PAGE HEADER
+    ================================================== -->
+
+    <section class="page-header">
+
+        <div>
+
+            <h2>
+                Completed Tasks
+            </h2>
+
+            <p>
+                Your maintenance work history.
+            </p>
+
+        </div>
+
+
+        <div class="history-count">
+
+            <strong>
+                {{ tasks|length }}
+            </strong>
+
+            <span>
+                Completed
+            </span>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         HISTORY TABLE
+    ================================================== -->
+
+    <section class="history-card">
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Task</th>
+
+                        <th>Room</th>
+
+                        <th>Category</th>
+
+                        <th>Priority</th>
+
+                        <th>Completed</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for task in tasks %}
+
+                    <tr>
+
+                        <td>
+
+                            <div class="task-info">
+
+                                <strong>
+                                    {{ task.issue_description }}
+                                </strong>
+
+                                <span>
+                                    Task #{{ task.id }}
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="room">
+
+                                Room {{ task.room_number }}
+
+                                <span>
+                                    Floor {{ task.floor_number }}
+                                </span>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="category">
+
+                                {{ task.category or "General" }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="priority
+                                {{ task.priority|lower|replace(' ', '-') }}">
+
+                                {{ task.priority }}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            {% if task.created_at %}
+
+                                {{ task.created_at.strftime('%d/%m/%Y') }}
+
+                            {% else %}
+
+                                —
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="status completed">
+
+                                ✓ Completed
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                {% else %}
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            <div class="empty-state">
+
+                                <div class="empty-icon">
+                                    📋
+                                </div>
+
+                                <h3>
+                                    No completed tasks
+                                </h3>
+
+                                <p>
+                                    Your completed maintenance tasks
+                                    will appear here.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

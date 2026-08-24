@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Hotel Maintenance System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/home.css') }}">
+
+    <link href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a href="/" class="logo">
+            AI Hotel Maintenance
+        </a>
+
+        <div class="nav-right">
+
+            <div class="language-selector">
+
+                <select id="language" name="language">
+
+                    <option value="en">English</option>
+                    <option value="fr">Français</option>
+                    <option value="ar">العربية</option>
+
+                </select>
+
+            </div>
+
+            <a href="/login" class="login-button">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                🤖 AI-Powered Hotel Maintenance
+            </div>
+
+            <h1>
+                Report.
+                <span>We Fix.</span>
+                You Relax.
+            </h1>
+
+            <h2>
+                Smarter Maintenance for Modern Hotels
+            </h2>
+
+            <p>
+                Found a maintenance problem?
+                Report it in seconds.
+            </p>
+
+            <p>
+                Our system analyzes the issue and helps assign
+                it to the right technician.
+            </p>
+
+
+            <!-- BUTTONS -->
+
+            <div class="hero-buttons">
+
+                <a href="/report" class="primary-button">
+                    Report a Maintenance Issue
+                    <span>→</span>
+                </a>
+
+                <a href="/login" class="secondary-button">
+                    Staff Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📋
+            </div>
+
+            <div>
+                <h3>
+                    Easy Reporting
+                </h3>
+
+                <p>
+                    Report maintenance problems
+                    quickly and easily.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🤖
+            </div>
+
+            <div>
+                <h3>
+                    AI-Powered
+                </h3>
+
+                <p>
+                    Analyze problems and help assign
+                    the most suitable technician.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                👷
+            </div>
+
+            <div>
+                <h3>
+                    Technician Assignment
+                </h3>
+
+                <p>
+                    Technicians receive their assigned
+                    maintenance tasks.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                ✅
+            </div>
+
+            <div>
+                <h3>
+                    Fast Resolution
+                </h3>
+
+                <p>
+                    Track tasks from reporting
+                    to completion.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 AI Hotel Maintenance System
+        </p>
+
+        <p>
+            Smart maintenance management for hotels
+        </p>
+
+    </footer>
+
+
+    <!-- ================= LANGUAGE SCRIPT ================= -->
+
+    <script>
+
+        const languageSelector =
+            document.getElementById("language");
+
+        languageSelector.addEventListener(
+            "change",
+            function () {
+
+                const language = this.value;
+
+                /*
+                 * Language functionality can be connected
+                 * to Flask later.
+                 */
+
+                console.log(
+                    "Selected language:",
+                    language
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
+

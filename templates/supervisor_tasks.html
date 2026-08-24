@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Supervisor Tasks</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/supervisor_tasks.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+
+        <a href="/supervisor_dashboard"
+           class="menu-item">
+
+            <span>📊</span>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="/supervisor_reports"
+           class="menu-item">
+
+            <span>📋</span>
+            <span>Reports</span>
+
+        </a>
+
+
+        <a href="/supervisor_tasks"
+           class="menu-item active">
+
+            <span>🔧</span>
+            <span>Tasks</span>
+
+        </a>
+
+
+        <a href="/workers"
+           class="menu-item">
+
+            <span>👨‍🔧</span>
+            <span>Workers</span>
+
+        </a>
+
+
+        <a href="/supervisor_ai"
+           class="menu-item">
+
+            <span>🤖</span>
+            <span>AI Assignments</span>
+
+        </a>
+
+
+        <a href="/notifications"
+           class="menu-item">
+
+            <span>🔔</span>
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="/supervisor_profile"
+           class="menu-item">
+
+            <span>👤</span>
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout"
+           class="logout">
+
+            <span>🚪</span>
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Maintenance Tasks</h1>
+
+            <p>
+                Manage and assign maintenance tasks to workers.
+            </p>
+
+        </div>
+
+
+        <div class="user-info">
+
+            <div class="user-avatar">
+                S
+            </div>
+
+            <div>
+
+                <strong>Supervisor</strong>
+
+                <span>Maintenance Supervisor</span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         FLASH MESSAGES
+    ================================================== -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            <div class="messages">
+
+                {% for category, message in messages %}
+
+                    <div class="message {{ category }}">
+
+                        {{ message }}
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <section class="statistics">
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon pending">
+                ⏳
+            </div>
+
+            <div>
+
+                <span>Pending</span>
+
+                <strong>
+                    {{ pending_tasks }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon assigned">
+                👨‍🔧
+            </div>
+
+            <div>
+
+                <span>Assigned</span>
+
+                <strong>
+                    {{ assigned_tasks }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon progress">
+                🔧
+            </div>
+
+            <div>
+
+                <span>In Progress</span>
+
+                <strong>
+                    {{ in_progress_tasks }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon completed">
+                ✓
+            </div>
+
+            <div>
+
+                <span>Completed</span>
+
+                <strong>
+                    {{ completed_tasks }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FILTERS
+    ================================================== -->
+
+    <section class="filter-card">
+
+        <form method="GET"
+              action="/supervisor_tasks"
+              class="filter-form">
+
+
+            <div>
+
+                <label>Status</label>
+
+                <select name="status">
+
+                    <option value="All"
+                        {% if selected_status == "All" %}
+                        selected
+                        {% endif %}>
+                        All
+                    </option>
+
+                    <option value="Pending"
+                        {% if selected_status == "Pending" %}
+                        selected
+                        {% endif %}>
+                        Pending
+                    </option>
+
+                    <option value="Assigned"
+                        {% if selected_status == "Assigned" %}
+                        selected
+                        {% endif %}>
+                        Assigned
+                    </option>
+
+                    <option value="In Progress"
+                        {% if selected_status == "In Progress" %}
+                        selected
+                        {% endif %}>
+                        In Progress
+                    </option>
+
+                    <option value="Completed"
+                        {% if selected_status == "Completed" %}
+                        selected
+                        {% endif %}>
+                        Completed
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <label>Priority</label>
+
+                <select name="priority">
+
+                    <option value="All"
+                        {% if selected_priority == "All" %}
+                        selected
+                        {% endif %}>
+                        All
+                    </option>
+
+                    <option value="Urgent"
+                        {% if selected_priority == "Urgent" %}
+                        selected
+                        {% endif %}>
+                        Urgent
+                    </option>
+
+                    <option value="High"
+                        {% if selected_priority == "High" %}
+                        selected
+                        {% endif %}>
+                        High
+                    </option>
+
+                    <option value="Medium"
+                        {% if selected_priority == "Medium" %}
+                        selected
+                        {% endif %}>
+                        Medium
+                    </option>
+
+                    <option value="Low"
+                        {% if selected_priority == "Low" %}
+                        selected
+                        {% endif %}>
+                        Low
+                    </option>
+
+                    <option value="Pending"
+                        {% if selected_priority == "Pending" %}
+                        selected
+                        {% endif %}>
+                        Pending
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button type="submit"
+                    class="filter-button">
+
+                Apply Filters
+
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         TASKS
+    ================================================== -->
+
+    <section class="tasks-section">
+
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Maintenance Tasks</h2>
+
+                <p>
+                    Assign reports to available maintenance workers.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        {% for task in tasks %}
+
+
+        <div class="task-card">
+
+
+            <!-- LEFT -->
+
+            <div class="task-main">
+
+
+                <div class="task-title-row">
+
+                    <h3>
+                        {{ task.issue_description }}
+                    </h3>
+
+
+                    <span class="status
+                        {{ task.status|lower|replace(' ', '-') }}">
+
+                        {{ task.status }}
+
+                    </span>
+
+                </div>
+
+
+                <p class="task-location">
+
+                    🏨 Room {{ task.room_number }}
+
+                    · Floor {{ task.floor_number }}
+
+                </p>
+
+
+                <div class="task-details">
+
+                    <span>
+                        📂 {{ task.category or "General" }}
+                    </span>
+
+                    <span>
+                        🚨 {{ task.priority }}
+                    </span>
+
+                    <span>
+                        🕒
+                        {% if task.created_at %}
+                            {{ task.created_at.strftime('%d/%m/%Y %H:%M') }}
+                        {% else %}
+                            —
+                        {% endif %}
+                    </span>
+
+                </div>
+
+
+                {% if task.assigned_worker %}
+
+                    <div class="assigned-info">
+
+                        👨‍🔧 Assigned to:
+
+                        <strong>
+                            {{ task.assigned_worker }}
+                        </strong>
+
+                    </div>
+
+                {% else %}
+
+                    <div class="unassigned-info">
+
+                        ⚠️ Not assigned
+
+                    </div>
+
+                {% endif %}
+
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <div class="task-actions">
+
+
+                {% if task.status != "Completed" %}
+
+
+                    <form method="POST"
+                          action="/supervisor_tasks/assign/{{ task.id }}"
+                          class="assign-form">
+
+
+                        <label>
+                            Assign Worker
+                        </label>
+
+
+                        <select name="worker_id"
+                                required>
+
+                            <option value="">
+                                Select worker
+                            </option>
+
+
+                            {% for worker in workers %}
+
+                                <option value="{{ worker.id }}">
+
+                                    {{ worker.name }}
+
+                                    —
+
+                                    {{ worker.department or "Maintenance" }}
+
+                                    ({{ worker.availability }})
+
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+
+                        <button type="submit"
+                                class="assign-button">
+
+                            {% if task.assigned_worker %}
+                                Reassign Task
+                            {% else %}
+                                Assign Task
+                            {% endif %}
+
+                        </button>
+
+
+                    </form>
+
+
+                {% else %}
+
+                    <div class="completed-label">
+
+                        ✓ Task Completed
+
+                    </div>
+
+                {% endif %}
+
+
+                <a href="/report_details/{{ task.id }}"
+                   class="view-button">
+
+                    View Report
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <div class="empty-state">
+
+            <div>
+                📋
+            </div>
+
+            <h3>
+                No tasks found
+            </h3>
+
+            <p>
+                There are no maintenance tasks matching your filters.
+            </p>
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+</html>

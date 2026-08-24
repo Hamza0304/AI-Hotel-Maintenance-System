@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Technician Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/Technician_Dashboard.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>Maintenance System</span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a href="/Technician_Dashboard"
+           class="menu-item active">
+
+            <span>📊</span>
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <!--<a href="/task_details"
+           class="menu-item">
+
+            <span>🔧</span>
+            <span>My Tasks</span>
+
+        </a>-->
+
+
+        <a href="/technician_history"
+           class="menu-item">
+
+            <span>📋</span>
+            <span>History</span>
+
+        </a>
+
+
+        <a href="/technician_notifications"
+           class="menu-item">
+
+            <span>🔔</span>
+            <span>Notifications</span>
+
+        </a>
+
+
+        <a href="/technician_profile"
+           class="menu-item">
+
+            <span>👤</span>
+            <span>Profile</span>
+
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a href="/logout"
+           class="logout">
+
+            <span>🚪</span>
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+====================================================== -->
+
+<main class="main-content">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Technician Dashboard</h1>
+
+            <p>
+                Manage your assigned maintenance tasks.
+            </p>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <button class="notification-button">
+
+                🔔
+
+                {% if urgent_tasks > 0 %}
+
+                    <span class="notification-count">
+                        {{ urgent_tasks }}
+                    </span>
+
+                {% endif %}
+
+            </button>
+
+
+            <div class="user-info">
+
+                <div class="user-avatar">
+
+                    {{ worker.name[0]|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        {{ worker.name }}
+                    </strong>
+
+                    <span>
+                        {{ worker.department or "Maintenance Technician" }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         WELCOME
+    ================================================== -->
+
+    <section class="welcome-section">
+
+        <h2>
+            Welcome back, {{ worker.name }} 👋
+        </h2>
+
+        <p>
+            Here is the current status of your maintenance tasks.
+        </p>
+
+    </section>
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <section class="statistics">
+
+
+        <!-- ACTIVE -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon blue">
+                🔧
+            </div>
+
+            <div>
+
+                <span>
+                    Active Tasks
+                </span>
+
+                <h3>
+                    {{ active_tasks }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- PENDING -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon orange">
+                ⏳
+            </div>
+
+            <div>
+
+                <span>
+                    Pending
+                </span>
+
+                <h3>
+                    {{ pending_tasks }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- URGENT -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon red">
+                🚨
+            </div>
+
+            <div>
+
+                <span>
+                    Urgent
+                </span>
+
+                <h3>
+                    {{ urgent_tasks }}
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <!-- COMPLETED -->
+
+        <div class="stat-card">
+
+            <div class="stat-icon green">
+                ✓
+            </div>
+
+            <div>
+
+                <span>
+                    Completed
+                </span>
+
+                <h3>
+                    {{ completed_tasks }}
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         MAIN GRID
+    ================================================== -->
+
+    <section class="dashboard-grid">
+
+
+        <!-- =================================================
+             MY TASKS
+        ================================================== -->
+
+        <div class="tasks-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        My Tasks
+                    </h2>
+
+                    <p>
+                        Maintenance tasks assigned to you.
+                    </p>
+
+                </div>
+
+
+                <a href="/task_details">
+                    View All
+                </a>
+
+            </div>
+
+
+            <!-- TASKS -->
+
+            {% for task in tasks %}
+
+            <div class="task-card">
+
+
+                <!-- LEFT -->
+
+                <div class="task-left">
+
+
+                    <span class="priority
+                        {{ task.priority|lower|replace(' ', '-') }}">
+
+                        {{ task.priority }}
+
+                    </span>
+
+
+                    <h3>
+                        {{ task.issue_description }}
+                    </h3>
+
+
+                    <p>
+
+                        Room {{ task.room_number }}
+
+                        ·
+
+                        Floor {{ task.floor_number }}
+
+                    </p>
+
+
+                    <span class="category">
+
+                        {{ task.category or "General" }}
+
+                    </span>
+
+                </div>
+
+
+                <!-- MIDDLE -->
+
+                <div class="task-middle">
+
+                    <span>
+                        Reported
+                    </span>
+
+                    {% if task.created_at %}
+
+                        <strong>
+                            {{ task.created_at.strftime('%H:%M') }}
+                        </strong>
+
+                    {% else %}
+
+                        <strong>
+                            —
+                        </strong>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <div class="task-right">
+
+
+                    <span class="status
+                        {{ task.status|lower|replace(' ', '-') }}">
+
+                        {{ task.status }}
+
+                    </span>
+
+
+                  {% if task.status == "Assigned" %}
+
+<form action="{{ url_for('technician_start_task', report_id=task.id) }}"
+      method="POST">
+
+    <button type="submit" class="start-task-btn">
+        ▶ Start Task
+    </button>
+
+</form>
+
+{% elif task.status == "In Progress" %}
+
+<form action="{{ url_for('technician_complete_task', report_id=task.id) }}"
+      method="POST">
+
+    <button type="submit" class="complete-task-btn">
+        ✓ Complete Task
+    </button>
+
+</form>
+
+{% elif task.status == "Completed" %}
+
+<span class="completed-label">
+    ✓ Completed
+</span>
+
+{% endif %}
+
+
+                </div>
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- NO TASKS -->
+
+            <div class="empty-state">
+
+                <div>
+                    🔧
+                </div>
+
+                <h3>
+                    No tasks assigned
+                </h3>
+
+                <p>
+                    You currently don't have any maintenance tasks.
+                </p>
+
+            </div>
+
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT PANEL
+        ================================================== -->
+
+        <aside class="right-panel">
+
+
+            <!-- WORKER INFORMATION -->
+
+            <div class="panel-card">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        My Information
+                    </h2>
+
+                </div>
+
+
+                <div class="worker-profile">
+
+
+                    <div class="large-avatar">
+
+                        {{ worker.name[0]|upper }}
+
+                    </div>
+
+
+                    <h3>
+                        {{ worker.name }}
+                    </h3>
+
+
+                    <p>
+                        {{ worker.department or "Maintenance" }}
+                    </p>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Phone
+                    </span>
+
+                    <strong>
+                        {{ worker.phone or "Not provided" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Skills
+                    </span>
+
+                    <strong>
+                        {{ worker.skills or "General Maintenance" }}
+                    </strong>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Status
+                    </span>
+
+                    <strong class="worker-status
+                        {{ worker.availability|lower|replace(' ', '-') }}">
+
+                        {{ worker.availability }}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="panel-card">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                </div>
+
+
+                <a href="/task_details"
+                   class="quick-action">
+
+                    🔧
+
+                    <span>
+                        View My Tasks
+                    </span>
+
+                </a>
+
+
+                <a href="/technician/history"
+                   class="quick-action">
+
+                    📋
+
+                    <span>
+                        Task History
+                    </span>
+
+                </a>
+
+
+                <a href="/technician/notifications"
+                   class="quick-action">
+
+                    🔔
+
+                    <span>
+                        Notifications
+                    </span>
+
+                </a>
+
+
+                <a href="/technician/profile"
+                   class="quick-action">
+
+                    👤
+
+                    <span>
+                        My Profile
+                    </span>
+
+                </a>
+
+            </div>
+
+
+        </aside>
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>

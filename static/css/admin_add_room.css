@@ -1,0 +1,679 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 250px;
+    height: 100vh;
+
+    background: #111827;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 1000;
+}
+
+
+/* LOGO */
+
+.sidebar-logo {
+    padding: 28px 24px;
+
+    border-bottom: 1px solid #273244;
+}
+
+
+.sidebar-logo h2 {
+    color: #ffffff;
+    font-size: 23px;
+    margin-bottom: 6px;
+}
+
+
+.sidebar-logo span {
+    color: #9ca3af;
+    font-size: 13px;
+}
+
+
+/* MENU */
+
+.sidebar-menu {
+    padding: 20px 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.menu-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: 0.2s ease;
+}
+
+
+.menu-item:hover {
+    background: #1f2937;
+    color: #ffffff;
+}
+
+
+.menu-item.active {
+    background: #2563eb;
+    color: #ffffff;
+}
+
+
+.menu-item span {
+    font-size: 14px;
+}
+
+
+/* LOGOUT */
+
+.logout-container {
+    margin-top: auto;
+
+    padding: 20px 14px;
+
+    border-top: 1px solid #273244;
+}
+
+
+.logout {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    transition: 0.2s ease;
+}
+
+
+.logout:hover {
+    background: #7f1d1d;
+    color: #ffffff;
+}
+
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.main-content {
+    margin-left: 450px;
+
+    min-height: 100vh;
+
+    padding: 35px 45px;
+}
+
+
+
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+
+.topbar h1 {
+    font-size: 30px;
+
+    color: #111827;
+
+    margin-bottom: 7px;
+}
+
+
+.topbar p {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* BACK BUTTON */
+
+.back-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 11px 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+
+.back-button:hover {
+    background: #f3f4f6;
+
+    border-color: #9ca3af;
+}
+
+
+
+/* =====================================================
+   HOTEL INFORMATION
+===================================================== */
+
+.hotel-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 22px 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+
+.hotel-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 10px;
+
+    font-size: 25px;
+}
+
+
+.hotel-card span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.7px;
+
+    margin-bottom: 4px;
+}
+
+
+.hotel-card strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 18px;
+
+    margin-bottom: 3px;
+}
+
+
+.hotel-card p {
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+
+/* =====================================================
+   FORM CARD
+===================================================== */
+
+.form-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 30px;
+
+    max-width: 850px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+
+    margin-bottom: 25px;
+}
+
+
+
+/* =====================================================
+   CARD HEADER
+===================================================== */
+
+.card-header {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 25px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.section-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 10px;
+
+    font-size: 23px;
+}
+
+
+.card-header h2 {
+    font-size: 20px;
+
+    color: #111827;
+
+    margin-bottom: 5px;
+}
+
+
+.card-header p {
+    color: #6b7280;
+
+    font-size: 13px;
+}
+
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+form {
+    width: 100%;
+}
+
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+
+.form-group label {
+    display: block;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+
+.form-group label span {
+    color: #dc2626;
+
+    margin-left: 3px;
+}
+
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.form-group input::placeholder {
+    color: #9ca3af;
+}
+
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+.form-group small {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+    margin-top: 6px;
+}
+
+
+
+/* =====================================================
+   FORM ACTIONS
+===================================================== */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 10px;
+
+    margin-top: 10px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+
+.cancel-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 45px;
+
+    padding: 0 22px;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    border: 1px solid #d1d5db;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+
+.cancel-button:hover {
+    background: #f3f4f6;
+}
+
+
+.save-button {
+    height: 45px;
+
+    padding: 0 24px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.save-button:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+
+
+/* =====================================================
+   INFORMATION CARD
+===================================================== */
+
+.info-card {
+    max-width: 850px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+    background: #eff6ff;
+
+    border: 1px solid #bfdbfe;
+
+    border-radius: 12px;
+
+    padding: 22px 25px;
+}
+
+
+.info-icon {
+    font-size: 22px;
+
+    flex-shrink: 0;
+}
+
+
+.info-card h3 {
+    color: #1e40af;
+
+    font-size: 15px;
+
+    margin-bottom: 6px;
+}
+
+
+.info-card p {
+    color: #475569;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 210px;
+    }
+
+    .main-content {
+        margin-left: 210px;
+
+        padding: 30px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        height: auto;
+    }
+
+
+    .sidebar-menu {
+        flex-direction: row;
+
+        flex-wrap: wrap;
+    }
+
+
+    .logout-container {
+        margin-top: 0;
+    }
+
+
+    .main-content {
+        margin-left: 0;
+
+        padding: 25px 18px;
+    }
+
+
+    .topbar {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+
+    .hotel-card {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .form-card {
+        padding: 22px 18px;
+    }
+
+
+    .form-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .cancel-button,
+    .save-button {
+        width: 100%;
+    }
+
+}

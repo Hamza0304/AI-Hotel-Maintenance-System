@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Floors & Rooms | AI Hotel</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/admin_rooms.css') }}"
+    >
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/role-theme.css') }}">
+</head>
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <h2>AI Hotel</h2>
+
+        <span>
+            Maintenance System
+        </span>
+
+    </div>
+
+
+    <nav class="sidebar-menu">
+
+        <a
+            href="{{ url_for('admin_dashboard') }}"
+            class="menu-item"
+        >
+            📊
+            <span>Dashboard</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_setup') }}"
+            class="menu-item"
+        >
+            ⚙️
+            <span>Hotel Setup</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_rooms') }}"
+            class="menu-item active"
+        >
+            🚪
+            <span>Rooms</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_workers') }}"
+            class="menu-item"
+        >
+            👨‍🔧
+            <span>Workers</span>
+        </a>
+
+
+          <a
+            href="/admin_staff_accounts" class="menu-item">
+                <span>👥</span>
+                <span>Staff Accounts</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_import') }}"
+            class="menu-item"
+        >
+            📥
+            <span>Import Data</span>
+        </a>
+
+
+        <a
+            href="/admin_settings"
+            class="menu-item"
+        >
+            🔧
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="logout-container">
+
+        <a
+            href="{{ url_for('logout') }}"
+            class="logout"
+        >
+            🚪
+            <span>Logout</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+    <!-- =================================================
+         TOPBAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>
+                Floors & Rooms
+            </h1>
+
+            <p>
+                Manage the hotel structure and room information.
+            </p>
+
+        </div>
+
+
+        <a
+            href="{{ url_for('admin_add_room_page') }}"
+            class="primary-button"
+        >
+            + Add Room
+        </a>
+
+    </header>
+
+
+
+    <!-- =================================================
+         HOTEL INFORMATION
+    ================================================== -->
+
+    {% if hotel %}
+
+    <section class="hotel-info">
+
+        <div>
+
+            <span>
+                Hotel
+            </span>
+
+            <strong>
+                {{ hotel.hotel_name }}
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Address
+            </span>
+
+            <strong>
+                {{ hotel.address }}
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Floors
+            </span>
+
+            <strong>
+                {{ hotel.floors }}
+            </strong>
+
+        </div>
+
+
+        <div>
+
+            <span>
+                Rooms configured
+            </span>
+
+            <strong>
+                {{ hotel.rooms }}
+            </strong>
+
+        </div>
+
+    </section>
+
+    {% else %}
+
+    <section class="hotel-info">
+
+        <div>
+
+            <span>
+                Hotel
+            </span>
+
+            <strong>
+                No hotel configured
+            </strong>
+
+        </div>
+
+        <div>
+
+            <a
+                href="{{ url_for('admin_setup') }}"
+                class="secondary-button"
+            >
+                Configure Hotel
+            </a>
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+         SUMMARY
+    ================================================== -->
+
+    <section class="summary-grid">
+
+
+        <!-- TOTAL FLOORS -->
+
+        <div class="summary-card">
+
+            <span>
+                Total Floors
+            </span>
+
+            <strong>
+                {{ total_floors }}
+            </strong>
+
+        </div>
+
+
+        <!-- TOTAL ROOMS CONFIGURED IN HOTEL -->
+
+        <div class="summary-card">
+
+            <span>
+                Total Rooms
+            </span>
+
+            <strong>
+                {{ total_rooms }}
+            </strong>
+
+        </div>
+
+
+        <!-- ACTUAL ROOMS CREATED -->
+
+        <div class="summary-card">
+
+            <span>
+                Configured
+            </span>
+
+            <strong class="green">
+                {{ configured_rooms }}
+            </strong>
+
+        </div>
+
+
+        <!-- AVAILABLE ACTUAL ROOMS -->
+
+        <div class="summary-card">
+
+            <span>
+                Available
+            </span>
+
+            <strong class="blue">
+                {{ available_rooms }}
+            </strong>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACTIONS
+    ================================================== -->
+
+    <section class="actions">
+
+
+        <a
+            href="{{ url_for('admin_add_room_page') }}"
+            class="primary-button"
+        >
+            + Add Room
+        </a>
+
+
+        <a
+            href="#generator"
+            class="secondary-button"
+        >
+            🤖 Generate Rooms
+        </a>
+
+
+        <a
+            href="{{ url_for('admin_import') }}"
+            class="secondary-button"
+        >
+            📥 Import Excel
+        </a>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ROOMS TABLE
+    ================================================== -->
+
+    <section class="rooms-card">
+
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Hotel Rooms
+                </h2>
+
+                <p>
+                    Rooms currently registered in the system.
+                </p>
+
+            </div>
+
+
+            <strong>
+                {{ configured_rooms }} / {{ total_rooms }} Rooms
+            </strong>
+
+        </div>
+
+
+
+        {% if rooms %}
+
+
+        <div class="rooms-table">
+
+
+            <!-- HEADER -->
+
+            <div class="room-row room-header">
+
+                <span>
+                    Room
+                </span>
+
+                <span>
+                    Floor
+                </span>
+
+                <span>
+                    Type
+                </span>
+
+                <span>
+                    Status
+                </span>
+
+            </div>
+
+
+
+            <!-- ROOMS -->
+
+            {% for room in rooms %}
+
+            <div class="room-row">
+
+
+                <span>
+
+                    <strong>
+                        {{ room.room_number }}
+                    </strong>
+
+                </span>
+
+
+                <span>
+
+                    Floor {{ room.floor_number }}
+
+                </span>
+
+
+                <span>
+
+                    {{ room.room_type or "Standard" }}
+
+                </span>
+
+
+                <span
+                    class="
+                        status
+                        {% if room.status == 'Available' %}
+                            available
+                        {% elif room.status == 'Occupied' %}
+                            occupied
+                        {% elif room.status == 'Maintenance' %}
+                            maintenance
+                        {% else %}
+                            unavailable
+                        {% endif %}
+                    "
+                >
+
+                    {{ room.status }}
+
+                </span>
+
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- EMPTY -->
+
+        <div class="empty-state">
+
+            <div>
+                🚪
+            </div>
+
+            <h3>
+                No rooms configured yet
+            </h3>
+
+            <p>
+                Your hotel has {{ total_rooms }} rooms configured,
+                but no room records have been created yet.
+            </p>
+
+
+            <a
+                href="{{ url_for('admin_add_room_page') }}"
+                class="primary-button"
+            >
+                + Add First Room
+            </a>
+
+        </div>
+
+
+        {% endif %}
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ROOM PROGRESS
+    ================================================== -->
+
+    <section class="progress-card">
+
+    <div class="progress-header">
+
+        <div>
+            <h2>Room Configuration Progress</h2>
+
+            <p>
+                {{ configured_rooms }} of {{ total_rooms }}
+                rooms have been added to the system.
+            </p>
+        </div>
+
+        <strong>
+            {{ room_percentage }}%
+        </strong>
+
+    </div>
+
+
+    <div class="progress-bar">
+
+        <div
+            class="progress-fill"
+            style="--progress: {{ room_percentage }}%;"
+        ></div>
+
+    </div>
+
+</section>
+
+
+
+    <!-- =================================================
+         AUTOMATIC ROOM GENERATOR
+    ================================================== -->
+
+    <section
+        class="generator"
+        id="generator"
+    >
+
+
+        <div class="generator-icon">
+            🤖
+        </div>
+
+
+        <div class="generator-content">
+
+            <h2>
+                Automatic Room Generation
+            </h2>
+
+            <p>
+
+                Enter the number of floors and rooms per floor.
+                The system will automatically generate room numbers.
+
+            </p>
+
+        </div>
+
+
+        <!-- IMPORTANT:
+             This now submits to the Flask POST route.
+        -->
+
+        <form
+            action="{{ url_for('admin_rooms') }}"
+            method="POST"
+            class="generator-form"
+        >
+
+
+            <input
+                type="number"
+                name="floors"
+                placeholder="Floors"
+                min="1"
+                value="{{ hotel.floors if hotel else '' }}"
+                required
+            >
+
+
+            <input
+                type="number"
+                name="rooms_per_floor"
+                placeholder="Rooms / Floor"
+                min="1"
+                required
+            >
+
+
+            <button
+                type="submit"
+            >
+                Generate
+            </button>
+
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ROOM STATISTICS
+    ================================================== -->
+
+    <section class="room-status-grid">
+
+
+        <div class="room-status-card">
+
+            <span class="status-icon available-icon">
+                ✓
+            </span>
+
+            <div>
+
+                <strong>
+                    {{ available_rooms }}
+                </strong>
+
+                <span>
+                    Available
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="room-status-card">
+
+            <span class="status-icon occupied-icon">
+                👤
+            </span>
+
+            <div>
+
+                <strong>
+                    {{ occupied_rooms }}
+                </strong>
+
+                <span>
+                    Occupied
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="room-status-card">
+
+            <span class="status-icon maintenance-icon">
+                🔧
+            </span>
+
+            <div>
+
+                <strong>
+                    {{ maintenance_rooms }}
+                </strong>
+
+                <span>
+                    Maintenance
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         AI INFORMATION
+    ================================================== -->
+
+    <section class="generator ai-information">
+
+        <div class="generator-icon">
+            🧠
+        </div>
+
+
+        <div class="generator-content">
+
+            <h2>
+                Why Room Data Matters
+            </h2>
+
+
+            <p>
+
+                The AI will use room numbers, floors, room status
+                and maintenance reports to understand where
+                problems occur and help select the appropriate worker.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+</body>
+
+</html>
