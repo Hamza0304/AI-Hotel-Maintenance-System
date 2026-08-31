@@ -7,6 +7,7 @@ from datetime import datetime
 import pandas as pd
 from dotenv import load_dotenv
 import os
+import uuid
 
 from werkzeug.utils import secure_filename
 from openpyxl import Workbook
@@ -4353,7 +4354,7 @@ def import_excel():
     filename = secure_filename(file.filename)
 
     filepath = os.path.join(
-        app.config["UPLOAD_FOLDER"],
+        "/tmp",
         filename
     )
 
