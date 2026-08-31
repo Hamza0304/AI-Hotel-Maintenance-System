@@ -4734,6 +4734,43 @@ def admin_reset_system():
 
         return "System reset failed. Check the Flask console.", 500
 
+
+
+
+
+@app.route("/debug_excel")
+def debug_excel():
+    try:
+        import pandas
+        import openpyxl
+
+        upload_folder = app.config.get("UPLOAD_FOLDER")
+
+        return f"""
+        <h1>Excel Debug</h1>
+
+        <p><b>Python:</b> {os.sys.version}</p>
+        <p><b>Pandas:</b> {pandas.__version__}</p>
+        <p><b>OpenPyXL:</b> {openpyxl.__version__}</p>
+
+        <p><b>UPLOAD_FOLDER:</b> {upload_folder}</p>
+
+        <p><b>Folder exists:</b>
+        {os.path.exists(upload_folder) if upload_folder else False}
+        </p>
+
+        <p><b>Current directory:</b>
+        {os.getcwd()}
+        </p>
+        """
+
+    except Exception as e:
+        return f"""
+        <h1>Debug Error</h1>
+        <p><b>{type(e).__name__}</b></p>
+        <p>{str(e)}</p>
+        """, 500
+
 # =========================================================
 # SUPERVISOR AI ANALYSIS
 # =========================================================
